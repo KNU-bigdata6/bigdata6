@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width",inital-scale="1.0">
+        <title>Document</title>
+    </head>
+<body>
+    <form action="/test" method=post>
+        <p>messege: <input type="text" name="messege"/></p>
+        <p><input type="submit" value="보내기"/></p>
+    </form>
+
+
+
+    {% for i in data_list  %}
+        <p>나 : {{i[0]}} </p>
+        <p>쳇봇 : {{i[1]}}</p>
+    {% endfor %}
+
+    <button type="submit">
+        <a href="{{ url_for('vars') }}"><span>홈</span></a>
+    </button>
+</body>
+
+</html>

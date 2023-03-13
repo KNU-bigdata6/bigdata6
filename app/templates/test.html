@@ -5,23 +5,48 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width",inital-scale="1.0">
         <title>Document</title>
+        <script src="https://code.jquery.com/jquery-latest.min.js"></script>
     </head>
 <body>
-    <form action="/test" method=post>
-        <p>messege: <input type="text" name="messege"/></p>
-        <p><input type="submit" value="보내기"/></p>
-    </form>
 
-
-
-    {% for i in data_list  %}
-        <p>나 : {{i[0]}} </p>
-        <p>쳇봇 : {{i[1]}}</p>
-    {% endfor %}
+    <p>messege: <input type="text" id="question" value =""/></p>
+    <p><input type = "button" onclick="q1()" value="보내기"></p>
+    <ul id="communication">
+        {% for i in data_list %}
+        <li> name : {{i[0]}} </li>
+        <li> ai : {{i[1]}}</li>
+        {% endfor %}
+    </ul>
 
     <button type="submit">
         <a href="{{ url_for('vars') }}"><span>홈</span></a>
     </button>
+    <script>
+        function q1(){
+            $('#question').empty();
+            var q = $('#question').val();
+            let d = `<li> name : ${q} </li>` // `이거로
+            $('#communication').append(d);
+            var postdata ={
+                "question" : q
+            }
+            document.getElementById("question").value ='';
+            $.ajax({
+                type:'POST',
+                url:'{{url_for("vars2")}}',
+                async : true,
+                data: JSON.stringify(postdata),
+                dataType : 'JSON',
+                contentType: "application/json",
+                success: function(airesponse){
+                    let r = airesponse.result2['data'];
+                    let str_response = `<li> ai : ${r} </li>`;
+                    $('#communication').append(str_response);
+                },
+            })
+        }
+
+    </script>
 </body>
 
 </html>

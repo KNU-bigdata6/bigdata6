@@ -1,5 +1,5 @@
 #!/bin/bash
-chmod 755 ./jinja.py
+chmod 755 ./runserver.py
 
 if [ ! -d venv ]; then
 	python3 -m venv venv

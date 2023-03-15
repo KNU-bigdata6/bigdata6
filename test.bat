@@ -2,11 +2,11 @@
 
 IF NOT EXIST venv (
   python -m venv venv
-  actiavte venv
+  venv\scripts\activate
   pip install --upgrade pip
   pip install -r requirements.txt
 )
 
-activate venv
+venv\scripts\activate
 SET FLASK_APP = runserver.py
 Flask run

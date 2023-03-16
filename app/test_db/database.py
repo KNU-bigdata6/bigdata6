@@ -34,3 +34,27 @@ class Database:
             return
         self.conn.close()
         self.conn = None
+        
+    # DB commit 필요한 쿼리 (INSERT, DELETE)
+    def execute(self, sql):
+        with self.conn.cursor() as cursor:
+            cursor.execute(sql)
+        self.conn.commit()
+    
+    def select_one(self, sql):
+        result = None
+        
+        with self.conn.cursor( ) as cursor:
+            cursor.execute(sql)
+            result = cursor.fetchone()
+        
+        return result
+    
+    def select_all(self, sql):
+        result_list = ()
+        
+        with self.conn.cursor() as cursor:
+            cursor.execute(sql)
+            result_list = cursor.fetchall()
+        
+        return result_list

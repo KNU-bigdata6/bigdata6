@@ -19,7 +19,7 @@
     </ul>
 
     <button type="submit">
-        <a href="{{ url_for('vars') }}"><span>홈</span></a>
+        <a href="{{ url_for('main.vars') }}"><span>홈</span></a>
     </button>
     <script>
         function q1(){
@@ -33,7 +33,7 @@
             document.getElementById("question").value ='';
             $.ajax({
                 type:'POST',
-                url:'{{url_for("vars2")}}',
+                url:'{{url_for("main.vars2")}}',
                 async : true,
                 data: JSON.stringify(postdata),
                 dataType : 'JSON',

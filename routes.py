@@ -23,7 +23,7 @@ def vars2():
         return jsonify(result="success", result2=ai)
     else:
         # 초기 세팅
-        return render_template('test.html', data_list=L)
+        return render_template('test.html')
 
 
 @main.route('/join', methods=['GET', 'POST'])

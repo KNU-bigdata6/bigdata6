@@ -1,5 +1,4 @@
-@echo off 
-
+@echo off
 IF NOT EXIST venv (
   python -m venv venv
   venv\scripts\activate
@@ -7,6 +6,5 @@ IF NOT EXIST venv (
   pip install -r requirements.txt
 )
 
-venv\scripts\activate
 SET FLASK_APP = runserver.py
 Flask run

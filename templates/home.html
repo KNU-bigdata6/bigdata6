@@ -23,12 +23,21 @@
             </button>
             <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
                 <ul class="navbar-nav">
+                    {% if login %}
+                    <li class="nav-item align-self-center">
+                        <a class="nav-link disabled" >{{userid}}님 환영합니다.</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url_for('main.login') }}">Logout</a>
+                    </li>
+                    {% else %}
                     <li class="nav-item">
                         <a class="nav-link" href="{{ url_for('main.join') }}">Sign up</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Sign in</a>
+                        <a class="nav-link" href="{{ url_for('main.login') }}">Sign in</a>
                     </li>
+                    {% endif %}
                 </ul>
             </div>
         </div>
@@ -142,7 +151,7 @@
                     <img src="/static/images/header-img.jpg" class="img-fluid p-4 rounded-circle" style="height: 300px; width: 300px;" >
                     <div class="card-body">
                         <h2 class="card-title fs-6 fw-bold">김혜수</h2>
-                        <p class="card-text">Business Design, PPT,Web UI Design</p>
+                        <p class="card-text">Business Design, PPT, Web UI Design</p>
                         <a href="https://github.com/KNU-bigdata6/bigdata6" class="btn btn-dark rounded-pill"><i class="bi bi-github"></i></a>
                     </div>
                 </div>

@@ -24,6 +24,7 @@ def vars2():
     else:
         # 초기 세팅
         return render_template('test.html')
+        #return render_template('test.html',login=1,userid='hi')
 
 
 @main.route('/join', methods=['GET', 'POST'])
@@ -45,3 +46,7 @@ def join():
             return redirect(url_for('main.vars'))
     else:
         return render_template('join.html')
+
+@main.route('/login', methods=['GET', 'POST'])
+def login():
+    return render_template('login.html')

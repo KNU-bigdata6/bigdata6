@@ -25,12 +25,21 @@
             </button>
             <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
                 <ul class="navbar-nav">
+                    {% if login %}
+                    <li class="nav-item align-self-center">
+                        <a class="nav-link disabled" >{{userid}}님 환영합니다.</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url_for('main.login') }}">Logout</a>
+                    </li>
+                    {% else %}
                     <li class="nav-item">
                         <a class="nav-link" href="{{ url_for('main.join') }}">Sign up</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Sign in</a>
+                        <a class="nav-link" href="{{ url_for('main.login') }}">Sign in</a>
                     </li>
+                    {% endif %}
                 </ul>
             </div>
         </div>
@@ -56,6 +65,13 @@
         </div>
     </div>
     {% endfor %}
+    <div class="row ms-4">
+        <div class="col-12">
+        <div class="btn btn-light btn-lg rounded-5 col-3 col-xl-2 text-start disabled">
+        <h5 class="text-dark"> Hi</h5>
+        </div>
+        </div>
+    </div>
 
     </section>
 
@@ -83,13 +99,15 @@
         var q = $('#question').val();
 
         if (q){
-        let d = `<div class="row mt-5 ms-4">
+        let d = `
+        <div class="row mt-3 me-3">
         <div class="col-12">
-        <div class="btn btn-light btn-lg rounded-5 col-3 col-xl-2 text-start disabled">
-        <h5 class="text-dark"> ${q}</h5>
+        <div class="btn btn-light btn-lg rounded-5 col-3 col-xl-2 text-start disabled" style="float:right;">
+        <h5 class="text-dark">${q}</h5>
         </div>
         </div>
-        </div>`; // `이거로
+        </div>`;
+        
         $('#question').empty();
         $('#communication').append(d);
         var postdata ={
@@ -105,14 +123,13 @@
             contentType: "application/json",
             success: function(airesponse){
                 let r = airesponse.result2['data'];
-                let str_response = `
-            <div class="row mt-3 me-3">
-            <div class="col-12">
-            <div class="btn btn-light btn-lg rounded-5 col-3 col-xl-2 text-start disabled" style="float:right;">
-            <h5 class="text-dark">${r}</h5>
-            </div>
-            </div>
-            </div>`;
+                let str_response = `<div class="row mt-5 ms-4">
+                <div class="col-12">
+                <div class="btn btn-light btn-lg rounded-5 col-3 col-xl-2 text-start disabled">
+                <h5 class="text-dark"> ${r}</h5>
+                </div>
+                </div>
+                </div>`; // `이거로
             $('#communication').append(str_response);
             $('#communication').scrollTop($('#communication')[0].scrollHeight);
             },

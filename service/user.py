@@ -57,7 +57,7 @@ class User(UserMixin):
     # db 연결 x -> 다시 연결
     conn_db(USER_DB)
     
-    sql = UserQuery.find_by_user_id(table = 'userTBL', user_id = user_id)
+    sql = UserQuery.find_by_user_id(user_id = user_id)
     result = USER_DB.select_one(sql)
     
     if not result:

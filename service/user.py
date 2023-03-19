@@ -1,6 +1,8 @@
 from db_model.db_connection import USER_DB, conn_db
 from db_model.user_query import UserQuery
+from db_model.record_query import RecordQuery
 from flask_login import UserMixin
+from datetime import datetime
 
 # 실제 로그인과 기록 조회
 class User(UserMixin):
@@ -86,6 +88,13 @@ class User(UserMixin):
       return user
     
   
-  # 회원 기록 조회
-  def record():
-    pass
+  # 회원 대화 기록 저장
+  def record(user_id, question, answer):
+    conn_db(USER_DB)
+    
+    # 회원 번호 조회
+    user = User.find_member(user_id)
+    id = user.id
+    
+    sql = RecordQuery(id ,question, answer, datetime.now())
+    USER_DB.execute(sql)

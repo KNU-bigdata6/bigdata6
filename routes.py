@@ -3,7 +3,6 @@ from flask_login import login_user, logout_user, current_user
 from service.user import User
 import hashlib
 
-
 main = Blueprint('main', __name__, url_prefix='/')
 
 
@@ -64,7 +63,7 @@ def login():
         user = User.user_check(user_id, hashed_password)
         # 아이디나 비밀번호가 틀린 경우
         if not user:
-            #경고문 띄우기
+            # 경고문 띄우기
             flash("login failed")
             return render_template('login.html')
         else:

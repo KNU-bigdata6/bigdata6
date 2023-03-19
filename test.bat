@@ -6,5 +6,5 @@ IF NOT EXIST venv (
   pip install -r requirements.txt
 )
 
-SET FLASK_APP = runserver.py
+SET FLASK_APP=runserver.py
 flask run

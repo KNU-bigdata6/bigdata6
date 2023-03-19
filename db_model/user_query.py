@@ -7,18 +7,24 @@ class UserQuery():
   
   # 전체 회원 조회 쿼리
   @staticmethod
-  def find_all(table):
-    sql = f"SELECT * FROM {table}"
+  def find_all():
+    sql = f"SELECT * FROM userTBL"
     return sql
   
   # 회원 user_id로 조회 쿼리
   @staticmethod
-  def find_by_user_id(table, user_id):
-    sql = f"SELECT * FROM {table} WHERE userid = '{user_id}'"
+  def find_by_user_id(user_id):
+    sql = f"SELECT * FROM userTBL WHERE userid = '{user_id}'"
     return sql
   
-  # 회원 탈퇴 쿼리
+  # 회원 번호로 조회 쿼리
   @staticmethod
-  def withdrawl(table, user_id):
-    sql = f"DELETE FROM {table} WHERE userid = '{user_id}'"
+  def find_by_id(id):
+    sql = f"SELECT * FROM userTBL WHERE id  = {id}"
+    return sql
+  
+  # 회원 삭제 쿼리
+  @staticmethod
+  def delete_by_user_id(user_id):
+    sql = f"DELETE FROM userTBL WHERE userid = '{user_id}'"
     return sql

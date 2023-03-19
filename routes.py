@@ -1,4 +1,5 @@
 from flask import Flask, render_template, request, jsonify, make_response, Blueprint, redirect, url_for
+from flask_login import login_user, logout_user, current_user
 from service.user import User
 import hashlib
 
@@ -6,9 +7,13 @@ L = [["dasfad", "굿"], ["dasfad", "굿"], ["dasfad", "굿"]]
 
 main = Blueprint('main', __name__, url_prefix='/')
 
-
 @main.route('/')
 def vars():
+    # runserver의 user_loader가 호출됨 flask login이 http request에서 id를 자동으로 넣어줌
+    if current_user.is_authenticated:
+        print("로그인된 사용자")
+    else:
+        print("안돼 돌아가")
     return render_template('home.html')
 
 
@@ -23,21 +28,18 @@ def vars2():
         return jsonify(result="success", result2=ai)
     else:
         # 초기 세팅
-        return render_template('test.html')
-        #return render_template('test.html',login=1,userid='hi')
+        return render_template('test.html', data_list=L)
 
-
-@main.route('/join', methods=['GET', 'POST'])
+@main.route('/join', methods = ['GET','POST'])
 def join():
     if request.method == 'POST':
         user_id = request.form['userid']
         name = request.form['name']
         password = request.form['password']
-        gender = request.form['gender']
+        gender = "남" if request.form['gender'] == 'Male' else "여"
         hashed_password = hashlib.sha256(password.encode('utf-8')).hexdigest()
-
-        SUCCESS = User.join(
-            user_id=user_id, password=hashed_password, name=name, gender=gender)
+        
+        SUCCESS = User.join(user_id = user_id , password = hashed_password, name = name, gender = gender)
         # 가입 실패
         if not SUCCESS:
             return render_template('join.html')
@@ -47,6 +49,27 @@ def join():
     else:
         return render_template('join.html')
 
+
 @main.route('/login', methods=['GET', 'POST'])
 def login():
-    return render_template('login.html')
+    if request.method == 'POST':
+        user_id = request.form['userid']
+        password = request.form['password']
+        hashed_password = hashlib.sha256(password.encode('utf-8')).hexdigest()
+        
+        user = User.user_check(user_id, hashed_password)
+        # 아이디나 비밀번호가 틀린 경우
+        if not user :
+            return render_template('login.html')
+        else:
+            print(user.user_id, user.password, user.name, user.gender)
+            login_user(user)
+            return redirect(url_for('main.vars'))
+    else:
+        return render_template('login.html')
+
+# GET 메소드는 임시로 logout 버튼이 없어서 만들어 놓은것
+@main.route('/logout', methods = ['GET','POST'])
+def logout():
+    logout_user()
+    return redirect(url_for('main.vars'))

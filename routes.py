@@ -3,8 +3,6 @@ from flask_login import login_user, logout_user, current_user
 from service.user import User
 import hashlib
 
-L = [["dasfad", "굿"], ["dasfad", "굿"], ["dasfad", "굿"]]
-
 main = Blueprint('main', __name__, url_prefix='/')
 
 @main.route('/')
@@ -24,12 +22,11 @@ def vars2():
         tdata = request.get_json()
         # 데이터 db넣고 처리한후 ai 응답 담기
         ai = {"data": "굿"}
-        L.append([tdata["question"], "굿"])
         # ai db담기
         return jsonify(result="success", result2=ai)
     else:
         # 초기 세팅
-        return render_template('test.html', data_list=L)
+        return render_template('test.html')
 
 @main.route('/join', methods = ['GET','POST'])
 def join():

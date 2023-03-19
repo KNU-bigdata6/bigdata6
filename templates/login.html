@@ -47,11 +47,10 @@
 
         <h1 class="mb-5 text-secondary">MyPharmacists</h1>
 
-        <form method="POST" >
+        <form name="login_form" method="POST" onSubmit="return false;">
             <div class="form-group">
             <div class=" col-5 col-xl-3 mb-1" style="float: none; margin: 0 auto">
                 <input type="text" class="form-control" id="userid" placeholder="UserID" name="userid"/>
-                <!-- id는 삭제해도 되더라. 마지막에 name과 app.py의 get 메소드 사용하는 부분이 일치해야 상응한다 -->
             </div>
             </div>
             <div class=" col-5 col-xl-3 mb-1" style="float: none; margin: 0 auto">
@@ -60,7 +59,7 @@
             </div>
             </div>
 
-            <button type="submit" class="btn btn-outline-secondary btn-lg col-5 col-xl-3">Login</button>
+            <button onclick="login()" class="btn btn-outline-secondary btn-lg col-5 col-xl-3">Login</button>
             <div id="divMayus" class="text-secondary" style="visibility:hidden;font-size:10px;" >Caps Lock key is activated.</div>
         </form>
 
@@ -77,6 +76,18 @@
             document.getElementById('divMayus2').style.visibility = 'hidden';
         }
     }
+    function login(){
+            var form = document.login_form;
+            if (form.userid.value == "") {
+                alert("enter data");
+            }
+            else if(form.password.value == ""){
+                alert("enter data");
+            }
+            else{
+                form.submit();
+            }
+        }
 </script>
 
 </body>

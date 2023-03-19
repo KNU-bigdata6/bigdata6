@@ -63,7 +63,8 @@
                 <div class="form-group mt-5">
                     <label for="password">Password</label>
                     <input type="password" class="form-control" id="password" placeholder="Password" maxlength="12" name="password" onkeyup="p_check()" onkeypress="capLock(event)"/>
-                    <div id="divMayus" class="text-secondary" style="visibility:hidden;font-size:10px;" >Caps Lock key is activated.</div>
+                    <div id="divMayus3" class="text-secondary" style="visibility: visible; display: inline; font-size:10px;" >영어 소문자,특수문자,숫자 1글자 이상, 최소 8글자 </div>
+                    <div id="divMayus" class="text-secondary" style="visibility: hidden; font-size:10px;" >Caps Lock key is activated.</div>
                 </div>
                 <div class="form-group mt-4">
                     <label for="password2">Confirm new Password</label>
@@ -104,12 +105,14 @@
                 kc = e.keyCode ? e.keyCode : e.which;
                 sk = e.shiftKey ? e.shiftKey : ((kc == 16) ? true : false);
                 if(((kc >= 65 && kc <= 90) && !sk)||((kc >= 97 && kc <= 122) && sk)){
+                    document.getElementById('divMayus3').style.display="none";
                     document.getElementById('divMayus').style.visibility = 'visible';
                     document.getElementById('divMayus2').style.visibility = 'visible';
                 }
                 else{
                     document.getElementById('divMayus').style.visibility = 'hidden';
                     document.getElementById('divMayus2').style.visibility = 'hidden';
+                    document.getElementById('divMayus3').style.display = "inline";
                 }
                 }
 

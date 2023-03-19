@@ -15,7 +15,7 @@ CREATE TABLE IF NOT EXISTS `test_userDB`.`recordTBL` (
   `id` INT NOT NULL,
   `answer` VARCHAR(50) NOT NULL,
   `question` VARCHAR(50) NOT NULL,
-  'date' DATE NOT NULL,
+  `date` DATETIME NOT NULL,
   CONSTRAINT `fk_recordTBL_userTBL`
     FOREIGN KEY (`id`)
     REFERENCES `test_userDB`.`userTBL` (`id`)

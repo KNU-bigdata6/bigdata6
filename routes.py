@@ -21,11 +21,12 @@ def vars2():
         if request.method == 'POST':
             tdata = request.get_json()
             # 데이터 db넣고 처리한후 ai 응답 담기
+            User.record(current_user.user_id, tdata['question'], "굿")
             ai = {"data": "굿"}
             # ai db담기
             return jsonify(result="success", result2=ai)
         else:
-            return render_template('test.html')
+            return render_template('test.html', userid=current_user.user_id, login=True)
     else:
         # 경고문 띄우기
         flash("not login")
@@ -45,6 +46,8 @@ def join():
             user_id=user_id, password=hashed_password, name=name, gender=gender)
         # 가입 실패
         if not SUCCESS:
+            # 경고문 띄우기
+            flash("signup failed")
             return render_template('join.html')
         # 가입 성공
         else:
@@ -67,7 +70,6 @@ def login():
             flash("login failed")
             return render_template('login.html')
         else:
-            print(user.user_id, user.password, user.name, user.gender)
             login_user(user)
             return redirect(url_for('main.vars'))
     else:
@@ -79,7 +81,22 @@ def login():
 # GET 메소드는 임시로 logout 버튼이 없어서 만들어 놓은것
 
 
-@main.route('/logout', methods=['GET', 'POST'])
+@main.route('/logout', methods=['GET'])
 def logout():
     logout_user()
     return redirect(url_for('main.vars'))
+
+
+@main.route('/check', methods=['POST'])
+def check():
+    if request.method == 'POST':
+        tdata = request.get_json()
+        # 데이터 db넣고 처리한후 ai 응답 담기
+        checkID = tdata['id']
+        SECESS = User.check(checkID)
+        if SECESS:
+            check = {"Check": True}
+            return jsonify(result="success", result2=check)
+        else:
+            check = {"Check": False}
+            return jsonify(result="success", result2=check)

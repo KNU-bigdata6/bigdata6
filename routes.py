@@ -12,6 +12,7 @@ def vars():
     # runserver의 user_loader가 호출됨 flask login이 http request에서 id를 자동으로 넣어줌
     if current_user.is_authenticated:
         print("로그인된 사용자")
+        print(current_user.name)
     else:
         print("안돼 돌아가")
     return render_template('home.html')

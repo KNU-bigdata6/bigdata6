@@ -2,11 +2,14 @@ from flask import Flask, make_response, jsonify
 from service.user import User
 from routes import main
 from flask_login import LoginManager
+from datetime import timedelta
 
 app = Flask(__name__, static_url_path='/static')
 
 # 임의의 값 실제 배포할때는 랜덤 값 주도록 바꾸기 (개발 때만 고정)
 app.secret_key = "sdfieegrnqgono"
+# 5분 간 세션 유지
+app.config['PERMANENT_SESSION_LIFETIME'] = timedelta(minutes = 10)
 
 app.register_blueprint(main)
 

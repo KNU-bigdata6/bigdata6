@@ -1,4 +1,4 @@
-from db_model.db_connection import USER_DB
+from db_model.db_connection import USER_DB, conn_db
 from db_model.user_query import UserQuery
 from flask_login import UserMixin
 
@@ -17,6 +17,9 @@ class User(UserMixin):
   # 회원 가입 (중복 검증도 필요)
   @staticmethod
   def join(user_id, password, name, gender):
+    # db 연결 x -> 다시 연결
+    conn_db(USER_DB)
+    
     # 가입 성공유무
     SUCCESS = False
     user = User.find_member(user_id)
@@ -31,6 +34,9 @@ class User(UserMixin):
   # 회원 존재 유무 확인 (중복 검증, 회원 조회)
   @staticmethod
   def find_member(user_id):
+    # db 연결 x -> 다시 연결
+    conn_db(USER_DB)
+    
     sql = UserQuery.find_by_user_id(table = 'userTBL', user_id = user_id)
     result = USER_DB.select_one(sql)
     

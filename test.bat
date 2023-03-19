@@ -7,6 +7,5 @@ IF NOT EXIST venv (
   pip install -r requirements.txt
 )
 
-venv\scripts\activate
 SET FLASK_APP = runserver.py
-Flask run
+flask run

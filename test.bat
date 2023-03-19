@@ -1,5 +1,4 @@
-@echo off 
-
+@echo off
 IF NOT EXIST venv (
   python -m venv venv
   venv\scripts\activate

@@ -6,6 +6,7 @@ L = [["dasfad", "굿"], ["dasfad", "굿"], ["dasfad", "굿"]]
 
 main = Blueprint('main', __name__, url_prefix='/')
 
+
 @main.route('/')
 def vars():
     return render_template('home.html')
@@ -22,9 +23,11 @@ def vars2():
         return jsonify(result="success", result2=ai)
     else:
         # 초기 세팅
-        return render_template('test.html', data_list=L)
+        return render_template('test.html')
+        #return render_template('test.html',login=1,userid='hi')
 
-@main.route('/join', methods = ['GET','POST'])
+
+@main.route('/join', methods=['GET', 'POST'])
 def join():
     if request.method == 'POST':
         user_id = request.form['userid']
@@ -32,8 +35,9 @@ def join():
         password = request.form['password']
         gender = request.form['gender']
         hashed_password = hashlib.sha256(password.encode('utf-8')).hexdigest()
-        
-        SUCCESS = User.join(user_id = user_id , password = hashed_password, name = name, gender = gender)
+
+        SUCCESS = User.join(
+            user_id=user_id, password=hashed_password, name=name, gender=gender)
         # 가입 실패
         if not SUCCESS:
             return render_template('join.html')
@@ -43,3 +47,6 @@ def join():
     else:
         return render_template('join.html')
 
+@main.route('/login', methods=['GET', 'POST'])
+def login():
+    return render_template('login.html')

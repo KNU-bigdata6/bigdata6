@@ -44,7 +44,7 @@
         </div>
         <div class="row mt-5">
         <div class="col-12">
-            <form name="admin_form" method="POST" >
+            <form name="admin_form" method="POST" onSubmit="return false;">
                 <div class="form-group">
                     <label for="userid">UserID</label>
                 <div class="row">
@@ -200,7 +200,7 @@
                         success: function(Check){
                             let secess = Check.result2['Check'];
                             if(secess){
-                                alert("Secess")
+                                alert("Sucess")
                                 document.getElementById("userid").style.color = "green";
                                 document.getElementById("userid").style.borderColor = "green";
                                 document.getElementById("userid").readOnly = true;

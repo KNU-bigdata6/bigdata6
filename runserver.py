@@ -1,6 +1,7 @@
 from flask import Flask, make_response, jsonify
 from service.user import User
 from routes import main
+from chat import chat
 from flask_login import LoginManager
 from datetime import timedelta
 
@@ -12,6 +13,7 @@ app.secret_key = "sdfieegrnqgono"
 # app.config['PERMANENT_SESSION_LIFETIME'] = timedelta(minutes = 10)
 
 app.register_blueprint(main)
+app.register_blueprint(chat)
 
 login_manager = LoginManager()
 login_manager.init_app(app)  # app 에 login_manager연결

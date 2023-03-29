@@ -15,24 +15,6 @@ def vars():
         return render_template('home.html')
 
 
-@main.route('/test', methods=['GET', 'POST'])
-def vars2():
-    if current_user.is_authenticated:
-        if request.method == 'POST':
-            tdata = request.get_json()
-            # 데이터 db넣고 처리한후 ai 응답 담기
-            User.record(current_user.user_id, tdata['question'], "굿")
-            ai = {"data": "굿"}
-            # ai db담기
-            return jsonify(result="success", result2=ai)
-        else:
-            return render_template('test.html', userid=current_user.user_id, login=True)
-    else:
-        # 경고문 띄우기
-        flash("not login")
-        return redirect(url_for('main.login'))
-
-
 @main.route('/join', methods=['GET', 'POST'])
 def join():
     if request.method == 'POST':

@@ -5,8 +5,8 @@ from service.user import User
 chat = Blueprint('chat', __name__, url_prefix='/test')
 
 
-@chat.route('/businesse', methods=['GET', 'POST'])
-def bussniese():
+@chat.route('/business', methods=['GET', 'POST'])
+def business():
     if current_user.is_authenticated:
         if request.method == 'POST':
             tdata = request.get_json()

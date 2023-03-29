@@ -1,7 +1,4 @@
 
-    
-
-
 <!DOCTYPE html>
 <html lang="ko" style="height: 100%;">
 <head>
@@ -13,31 +10,36 @@
 
     </script>
 </head>
-<body class = "bg-dark text-secondary" style="height: 100%;">
-    <nav class="navbar navbar-expand-lg navbar-dark  border-bottom border-secondary">
-        <div class="container-fluid">
-            <a class="navbar-brand text-secondary" href="/">MyAIFriend</a>
-            <button class="navbar-toggler border-secondary " type="button"
-                    data-bs-toggle="collapse"
-                    data-bs-target="#navbarSupportedContent"
-                    aria-controls="navbarSupportedContent"
-                    aria-expanded="false"
-                    aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
-                <ul class="navbar-nav">
-                    <li class="nav-item">
-                        <a class="nav-link" href="/join">Sign up</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/login">Sign in</a>
-                    </li>
-                </ul>
-            </div>
+<nav class="navbar navbar-expand-lg navbar-dark  border-bottom border-secondary">
+    <div class="container-fluid">
+        <a class="navbar-brand text-secondary" href="{{ url_for('main.vars') }}">MyAIFriend</a>
+        <button class="navbar-toggler border-secondary " type="button"
+                data-bs-toggle="collapse"
+                data-bs-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent"
+                aria-expanded="false"
+                aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
+            <ul class="navbar-nav">
+                {% if login %}
+                <li class="nav-item align-self-center">
+                    <a class="nav-link disabled" >{{userid}}님 환영합니다.</a>
+                </li>
+                <li class="nav-item align-self-center">
+                    <a class="nav-link" href="{{ url_for('main.logout') }}">Logout</a>
+                </li>
+                <li class="nav-item align-self-center">
+                    <a class="nav-link" href="{{ url_for('main.myinfo') }}">information</a>
+                </li>
+                <li class="nav-item align-self-center">
+            </ul>
         </div>
-    </nav>
+    </div>
+</nav>
 
+    
     <div class = "container">
         <div class="row mt-5">
             <h1>MyAIFriend</h1>
@@ -48,12 +50,10 @@
                 <div class="form-group">
                     <label for="userid">UserID</label>
                 <div class="row">
-                    <div class="col-10">
+                    <div class="col-12">
                         <input type="text" class="form-control" id="userid" placeholder="UserID" name="userid" maxlength="9"/>
                     </div>
-                    <div class="col-2">
-                        <p><input type = "button" class="form-control text-light bg-dark" onclick="check()" value="Check"></p>
-                    </div>
+
                 </div>
             </div>
                 <div class="form-group mt-4">
@@ -62,10 +62,18 @@
                 </div>
                 <div class="form-group mt-5">
                     <label for="password">Password</label>
+                    <div class="row">
+                        <div class="col-10">
                     <input type="password" class="form-control" id="password" placeholder="Password" maxlength="12" name="password" onkeyup="p_check()" onkeypress="capLock(event)"/>
+                    <div class="col-2">
+                        <p><input type = "button" class="form-control text-light bg-dark" onclick="check()" value="Check"></p>
+                    </div>
                     <div id="divMayus3" class="text-secondary" style="visibility: visible; display: inline; font-size:10px;" >영어 소문자,특수문자,숫자 1글자 이상, 최소 8글자 </div>
                     <div id="divMayus" class="text-secondary" style="visibility: hidden; font-size:10px;" >Caps Lock key is activated.</div>
                 </div>
+            </div>
+
+            </div>
                 <div class="form-group mt-4">
                     <label for="password2">Confirm new Password</label>
                     <input type="password" class="form-control" id="password2" placeholder="Confirm new Password" name="password2" maxlength="12" onkeyup="p_check2()" onkeypress="capLock(event)" />

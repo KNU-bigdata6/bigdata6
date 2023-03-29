@@ -20,7 +20,7 @@
 
     <nav class="navbar navbar-expand-lg navbar-dark  border-bottom border-secondary">
         <div class="container-fluid">
-            <a class="navbar-brand text-secondary" href="{{ url_for('main.vars') }}">MyPharmacists</a>
+            <a class="navbar-brand text-secondary" href="{{ url_for('main.vars') }}">MyAIFriend</a>
             <button class="navbar-toggler border-secondary " type="button"
                     data-bs-toggle="collapse"
                     data-bs-target="#navbarSupportedContent"
@@ -35,14 +35,16 @@
                     <li class="nav-item align-self-center">
                         <a class="nav-link disabled" >{{userid}}님 환영합니다.</a>
                     </li>
-                    <li class="nav-item">
+                    <li class="nav-item align-self-center">
                         <a class="nav-link" href="{{ url_for('main.logout') }}">Logout</a>
                     </li>
+                    <li class="nav-item align-self-center">
+
                     {% else %}
-                    <li class="nav-item">
+                    <li class="nav-item align-self-center">
                         <a class="nav-link" href="{{ url_for('main.join') }}">Sign up</a>
                     </li>
-                    <li class="nav-item">
+                    <li class="nav-item align-self-center">
                         <a class="nav-link" href="{{ url_for('main.login') }}">Sign in</a>
                     </li>
                     {% endif %}
@@ -56,13 +58,35 @@
     </header>
 
 
+    <div class="row mt-5 ms-4 border-start">
+        <div class="col-7">
+            <h1 class="text-white fw-bold">What kind of conversation do you want?</h1>
+        </div>
+    </div>
+
 
     <saction class="container overflow-hidden">
-    <div class="row justify-content-center">
-        <a href="{{ url_for('main.vars2') }}" class="btn btn-outline-secondary btn-lg rounded-5 m-5 col-5 col-xl-3 text-start">
-        <h5 class="text-secondary">Start AI</h5>
-        <h6 class="text-opacity-75 text-secondary"> How to ask questions the smart way </h6>
+    <div class="row">
+    <div class="col-12 text-center">
+    <span>
+        <a href="{{ url_for('chat.life') }}" class="btn btn-outline-light col-2 col-xl-3 btn-lg rounded-5 m-5 text-start">
+        <h5 class="text-white">Life</h5>
+        <h6 class="text-opacity-75 text-secondary"> daily chatting  </h6>
         </a>
+    </span>
+    <span>
+        <a href="{{ url_for('chat.business') }}" class="btn btn-outline-light col-3 btn-lg rounded-5 m-5 text-start">
+        <h5 class="text-white">Business</h5>
+        <h6 class="text-opacity-75 text-secondary"> business conversation </h6>
+        </a>
+    </span>
+    <span>
+        <a href="{{ url_for('chat.study') }}" class="btn btn-outline-light col-2 col-xl-3 btn-lg rounded-5 m-5 text-start">
+        <h5 class="text-white">Study</h5>
+        <h6 class="text-opacity-75 text-secondary"> study chatting </h6>
+        </a>
+    </span>
+    </div>
     </div>
 
     <div class="row mt-5 ms-4 border-start">
@@ -172,7 +196,6 @@
     <footer class="container-fluid border-top border-secondary mt-5" style="bottom: 0px; height: 200px;">
         <p class="text-secondary mt-2 ms-2"> KNU bigdata6</p>
     </footer>
-
 
 
 

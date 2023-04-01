@@ -1,12 +1,14 @@
 from flask import Flask, render_template, request, jsonify, make_response, Blueprint, redirect, url_for, flash
 from flask_login import current_user
 from service.user import User
+import speech_recognition as sr
+
 
 chat = Blueprint('chat', __name__, url_prefix='/test')
 
 
-@chat.route('/businesse', methods=['GET', 'POST'])
-def bussniese():
+@chat.route('/business', methods=['GET', 'POST'])
+def business():
     if current_user.is_authenticated:
         if request.method == 'POST':
             tdata = request.get_json()
@@ -16,11 +18,35 @@ def bussniese():
             # ai db담기
             return jsonify(result="success", result2=ai)
         else:
-            return render_template('test.html', userid=current_user.user_id, login=True)
+            return render_template('business.html', userid=current_user.user_id, login=True)
     else:
         # 경고문 띄우기
         flash("not login")
         return redirect(url_for('main.login'))
+
+
+@chat.route('/business/audio', methods=['GET', 'POST'])
+def audio():
+    if request.method == 'POST':
+        result = sr.AudioFile(request.files['audio'])
+
+        r = sr.Recognizer()
+        with result as source:
+            audio = r.listen(source)
+        try:
+            text = r.recognize_google(audio, language='ko')
+            print(text)
+            ai = {"data": text}
+            return jsonify(result="success", result2=ai)
+
+        except sr.UnknownValueError:
+            print("Google 음성 인식이 오디오를 이해할 수 없습니다.")
+            ai = {"data": "Google 음성 인식이 오디오를 이해할 수 없습니다."}
+            return jsonify(result="success", result2=ai)
+        except sr.RequestError as e:
+            print("Google 음성 인식 서비스에서 결과를 요청할 수 없습니다.; {0}".format(e))
+            ai = {"data": "Google 음성 인식 서비스에서 결과를 요청할 수 없습니다."}
+            return jsonify(result="success", result2=ai)
 
 
 @chat.route('/study', methods=['GET', 'POST'])
@@ -34,7 +60,7 @@ def study():
             # ai db담기
             return jsonify(result="success", result2=ai)
         else:
-            return render_template('test.html', userid=current_user.user_id, login=True)
+            return render_template('study.html', userid=current_user.user_id, login=True)
     else:
         # 경고문 띄우기
         flash("not login")
@@ -52,7 +78,7 @@ def life():
             # ai db담기
             return jsonify(result="success", result2=ai)
         else:
-            return render_template('test.html', userid=current_user.user_id, login=True)
+            return render_template('life.html', userid=current_user.user_id, login=True)
     else:
         # 경고문 띄우기
         flash("not login")

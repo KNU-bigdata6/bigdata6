@@ -7,7 +7,7 @@ main = Blueprint('main', __name__, url_prefix='/')
 
 
 @main.route('/')
-def vars():
+def home():
     # runserver의 user_loader가 호출됨 flask login이 http request에서 id를 자동으로 넣어줌
     if current_user.is_authenticated:
         return render_template('home.html', userid=current_user.user_id, login=True)
@@ -33,7 +33,7 @@ def join():
             return render_template('join.html')
         # 가입 성공
         else:
-            return redirect(url_for('main.vars'))
+            return redirect(url_for('main.home'))
     else:
         return render_template('join.html')
 
@@ -53,10 +53,10 @@ def login():
             return render_template('login.html')
         else:
             login_user(user)
-            return redirect(url_for('main.vars'))
+            return redirect(url_for('main.home'))
     else:
         if current_user.is_authenticated:
-            return redirect(url_for('main.vars'))
+            return redirect(url_for('main.home'))
         else:
             return render_template('login.html')
 
@@ -66,7 +66,7 @@ def login():
 @main.route('/logout', methods=['GET'])
 def logout():
     logout_user()
-    return redirect(url_for('main.vars'))
+    return redirect(url_for('main.home'))
 
 
 @main.route('/check', methods=['POST'])

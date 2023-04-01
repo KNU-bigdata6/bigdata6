@@ -25,6 +25,12 @@ class UserQuery():
   
   # 회원 삭제 쿼리
   @staticmethod
-  def delete_by_user_id(user_id):
-    sql = f"DELETE FROM userTBL WHERE userid = '{user_id}'"
+  def delete_by_id(id):
+    sql = f"DELETE FROM userTBL WHERE id = {id}"
+    return sql
+  
+  # 회원 비밀 번호 수정 쿼리
+  @staticmethod
+  def update_password_by_id(id, new_password):
+    sql = f"UPDATE userTBL SET password = '{new_password}' WHERE id = {id}"
     return sql

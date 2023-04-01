@@ -34,9 +34,16 @@ def audio():
         with result as source:
             audio = r.listen(source)
         try:
-            text = r.recognize_google(audio, language='ko')
-            print(text)
-            ai = {"data": text}
+            # 텍스트 처리 stt
+            question = r.recognize_google(audio, language='ko')
+            print(question)
+            
+            # 답변 생성
+            answer = "답변"
+            
+            # 답변 전송
+            User.record(current_user.user_id, question, answer)
+            ai = {"data": answer}
             return jsonify(result="success", result2=ai)
 
         except sr.UnknownValueError:

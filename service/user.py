@@ -80,12 +80,12 @@ class User(UserMixin):
             )
             return user
 
-    # 회원 탈퇴
+    # 회원 탈퇴 (아직 사용 X)
     @staticmethod
-    def withdrawal(user_id):
+    def withdrawal(id):
         conn_db(USER_DB)
-    
-        sql = UserQuery.delete_by_user_id(user_id=user_id)
+
+        sql = UserQuery.delete_by_id(id = id)
         USER_DB.execute(sql)
         
         SUCCESS = True
@@ -105,6 +105,15 @@ class User(UserMixin):
         else:
             return user
 
+    # password 변경 (아직 사용 X)
+    @staticmethod
+    def user_password_change(id, new_password):
+        sql = UserQuery.update_password_by_id(id, new_password)
+        USER_DB.execute(sql)
+        
+        SUCCESS = True
+        return SUCCESS
+    
     # 회원 대화 기록 저장
     @staticmethod
     def record(user_id, question, answer):

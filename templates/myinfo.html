@@ -24,16 +24,22 @@
         <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
             <ul class="navbar-nav">
                 {% if login %}
-                <li class="nav-item align-self-center">
-                    <a class="nav-link disabled" >{{userid}}님 환영합니다.</a>
-                </li>
-                <li class="nav-item align-self-center">
-                    <a class="nav-link" href="{{ url_for('main.logout') }}">Logout</a>
-                </li>
-                <li class="nav-item align-self-center">
-                    <a class="nav-link" href="{{ url_for('main.myinfo') }}">information</a>
-                </li>
-                <li class="nav-item align-self-center">
+                    <li class="nav-item align-self-center">
+                        <a class="nav-link disabled" >{{userid}}님 환영합니다.</a>
+                    </li>
+                    <li class="nav-item align-self-center">
+                        <a class="nav-link" href="{{ url_for('main.logout') }}">Logout</a>
+                    </li>
+                    <li class="nav-item align-self-center">
+
+                    {% else %}
+                    <li class="nav-item align-self-center">
+                        <a class="nav-link" href="{{ url_for('main.join') }}">Sign up</a>
+                    </li>
+                    <li class="nav-item align-self-center">
+                        <a class="nav-link" href="{{ url_for('main.login') }}">Sign in</a>
+                    </li>
+                {% endif %}
             </ul>
         </div>
     </div>

@@ -74,18 +74,11 @@ def check():
         tdata = request.get_json()
         # 데이터 db넣고 처리한후 ai 응답 담기
         checkID = tdata['id']
-        SECESS = User.check(checkID)
-        if SECESS:
+        SUCCESS = User.check(checkID)
+        if SUCCESS:
             check = {"Check": True}
             return jsonify(result="success", result2=check)
         else:
             check = {"Check": False}
             return jsonify(result="success", result2=check)
 
-
-# 회원탈퇴 관련
-@main.route('/withdrawal', methods=['POST'])
-def withdrwal():
-    # SUCCESS : 성공 여부
-    SUCCESS = User.withdrawal(current_user.user_id)
-    return redirect(url_for('main.vars'), SUCCESS)

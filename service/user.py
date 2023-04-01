@@ -4,9 +4,8 @@ from db_model.record_query import RecordQuery
 from flask_login import UserMixin
 from datetime import datetime
 
-# 실제 로그인과 기록 조회
 
-
+# user 관련 객체 생성 (회원 번호 조회, 회원 가입, 회원 존재 유무, 회원 탈퇴, login id pw 검증, 회원 대화 기록 저장)
 class User(UserMixin):
     def __init__(self, id, user_id, password, name, gender):
         self.id = id
@@ -81,6 +80,18 @@ class User(UserMixin):
             )
             return user
 
+    # 회원 탈퇴
+    @staticmethod
+    def withdrawal(user_id):
+        conn_db(USER_DB)
+    
+        sql = UserQuery.delete_by_user_id(user_id=user_id)
+        USER_DB.execute(sql)
+        
+        SUCCESS = True
+        return SUCCESS
+
+
     # login 할때 id, pw 체크
     @staticmethod
     def user_check(user_id, password):
@@ -103,5 +114,6 @@ class User(UserMixin):
         user = User.find_member(user_id)
         id = user.id
         sql = RecordQuery.save(id, question, answer,
-                              datetime.now().strftime('%Y-%m-%d %H:%M:%S'))
+                            datetime.now().strftime('%Y-%m-%d %H:%M:%S'))
         USER_DB.execute(sql)
+    

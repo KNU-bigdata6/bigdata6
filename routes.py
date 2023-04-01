@@ -60,9 +60,8 @@ def login():
         else:
             return render_template('login.html')
 
+
 # GET 메소드는 임시로 logout 버튼이 없어서 만들어 놓은것
-
-
 @main.route('/logout', methods=['GET'])
 def logout():
     logout_user()
@@ -82,3 +81,11 @@ def check():
         else:
             check = {"Check": False}
             return jsonify(result="success", result2=check)
+
+
+# 회원탈퇴 관련
+@main.route('/withdrawal', methods=['POST'])
+def withdrwal():
+    # SUCCESS : 성공 여부
+    SUCCESS = User.withdrawal(current_user.user_id)
+    return redirect(url_for('main.vars'), SUCCESS)

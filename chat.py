@@ -34,7 +34,7 @@ def text(subject):
             # ai db담기
             return jsonify(result="success", result2=ai)
         else:
-            return render_template(f'{subject}.html', login=True)
+            return render_template(f'chat.html', login=True, subject=subject)
     else:
         # 경고문 띄우기
         flash("not login")

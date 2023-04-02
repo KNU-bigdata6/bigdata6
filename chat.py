@@ -19,8 +19,8 @@ def business():
             question = tdata['question']
 
             # 답변 생성
-            answer = "답변"
-            answer_to_voice = gTTS(text=answer, lang="ko")
+            answer = "request"
+            answer_to_voice = gTTS(text=answer, lang="en")
             c_user_id = current_user.get_user_id()
             answer_to_voice.save(f"./audio/{c_user_id}_{answer}.mp3")
             with open(f"./audio/{c_user_id}_{answer}.mp3", "rb") as audio_file:
@@ -51,10 +51,10 @@ def audio():
             audio = r.listen(source)
         try:
             # 텍스트 처리 stt, 추후 영어로 변경
-            question = r.recognize_google(audio, language='ko')
+            question = r.recognize_google(audio, language='en')
             # 답변 생성
-            answer = "답변"
-            answer_to_voice = gTTS(text=answer, lang="ko")
+            answer = "request"
+            answer_to_voice = gTTS(text=answer, lang="en")
             c_user_id = current_user.get_user_id()
             answer_to_voice.save(f"./audio/{c_user_id}_{answer}.mp3")
 
@@ -64,7 +64,7 @@ def audio():
             os.remove(f"./audio/{c_user_id}_{answer}.mp3")
 
             ai = {"data": answer, "request": question,
-                "answer_audio": encoded_string.decode()}
+                  "answer_audio": encoded_string.decode()}
             print(encoded_string.decode())
 
             # 답변 전송

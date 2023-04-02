@@ -32,12 +32,23 @@
             <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
                 <ul class="navbar-nav">
                     {% if login %}
-                    <li class="nav-item align-self-center">
-                        <a class="nav-link" href="{{ url_for('info.myinfo') }}">Myinfo</a>
+                    <li class="nav-item row text-center">
+                        <div class="nav-link col-6 border-bottom border-secondary text-light">Account</div>
+                        <div class="nav-link col-6 border-bottom border-secondary text-light">Conversation Type</div>
                     </li>
-                    <li class="nav-item align-self-center">
-                        <a class="nav-link" href="{{ url_for('main.logout') }}">Logout</a>
+                    <li class="nav-item row text-center">
+                        <a class="nav-link col-6 " href="{{ url_for('info.myinfo') }}">Myinfo</a>
+                        <a class="nav-link col-6 " href="{{ url_for('chat.life') }}">Life</a>
                     </li>
+                    <li class="nav-item row text-center">
+                        <a class="nav-link col-6" href="{{ url_for('main.logout') }}">Logout</a>
+                        <a class="nav-link col-6" href="{{ url_for('chat.business') }}">Business</a>
+                    </li>
+                    <li class="nav-item row text-center">
+                        <div class="nav-link col-6"></div>
+                        <a class="nav-link col-6 " href="{{ url_for('chat.study') }}">Study</a>
+                    </li>
+
                     {% else %}
                     <li class="nav-item align-self-center">
                         <a class="nav-link" href="{{ url_for('main.join') }}">Sign up</a>

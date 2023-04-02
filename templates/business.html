@@ -13,7 +13,7 @@
 <body class="bg-dark" style="height: 100%;">
 
 
-    <nav class="navbar navbar-expand-lg navbar-dark  border-bottom border-secondary">
+    <nav class="navbar navbar-dark  border-bottom border-secondary">
         <div class="container-fluid">
             <a class="navbar-brand text-secondary" href="{{ url_for('main.home') }}">MyAIFriend</a>
             <button class="navbar-toggler border-secondary " type="button"
@@ -28,16 +28,16 @@
                 <ul class="navbar-nav">
                     {% if login %}
                     <li class="nav-item align-self-center">
-                        <a class="nav-link disabled" >{{userid}}님 환영합니다.</a>
+                        <a class="nav-link" href="{{ url_for('info.myinfo') }}">Myinfo</a>
                     </li>
-                    <li class="nav-item">
+                    <li class="nav-item align-self-center">
                         <a class="nav-link" href="{{ url_for('main.logout') }}">Logout</a>
                     </li>
                     {% else %}
-                    <li class="nav-item">
+                    <li class="nav-item align-self-center">
                         <a class="nav-link" href="{{ url_for('main.join') }}">Sign up</a>
                     </li>
-                    <li class="nav-item">
+                    <li class="nav-item align-self-center">
                         <a class="nav-link" href="{{ url_for('main.login') }}">Sign in</a>
                     </li>
                     {% endif %}
@@ -98,6 +98,18 @@
 
 
     <script>
+
+
+    var input = document.getElementById("question");
+
+    input.addEventListener("keyup", function (event) {
+        if (event.keyCode === 13) {
+            event.preventDefault();
+            document.getElementById("text-send").click();
+        }
+    });
+
+
     var audio = document.querySelector('#audioe');
 
     function captureMicrophone(callback) {
@@ -111,7 +123,6 @@
     function stopRecordingCallback() {
         audio.src = audio.srcObject = null;
         var blob = recorder.getBlob();
-        console.log(blob)
         audio.src = URL.createObjectURL(blob);
         document.getElementById('audioe').style.display='block';
         document.getElementById('text-send').style.display='none';
@@ -175,7 +186,7 @@
         $('#question').empty();
         $('#communication').append(d);
         var postdata ={
-            "type" : '1' , "question" : q, "audio" : ''
+                "question" : q
                 }
         document.getElementById("question").value ='';
         $.ajax({
@@ -187,7 +198,17 @@
             contentType: "application/json",
             success: function(airesponse){
                 let r = airesponse.result2['data'];
-                let str_response = `<div class="row mt-5 ms-4">
+                let r2 = airesponse.result2['answer_audio'];
+
+                let audio_response2  = `<div class="row mt-5 ms-4">
+                <div class="col-12" >
+                <audio controls src= "data:audio/mp3;base64,${r2}" ></audio>
+                </div>
+                </div>
+                </div>`; // `이거로
+                $('#communication').append(audio_response2);
+
+                let str_response = `<div class="row mt-3 ms-4">
                 <div class="col-12">
                 <div class="btn btn-light btn-lg rounded-5 col-3 col-xl-2 text-start disabled">
                 <h5 class="text-dark"> ${r}</h5>
@@ -202,13 +223,13 @@
         $('#communication').scrollTop($('#communication')[0].scrollHeight);
     }
 }
+
     function audio_send(){
         document.getElementById('audioe').style.display='none';
         document.getElementById('text-send').style.display='block';
         document.getElementById('audio_send').style.display='none';
         document.getElementById('trash-recording').style.display='none';
         document.getElementById('start-recording').style.display='block';
-        console.log(recorder.getBlob())
 
         var formData = new FormData();
         file = new File([recorder.getBlob()], "audio.wav",);
@@ -231,11 +252,32 @@
             contentType:false,
             data: formData,
         success: function(airesponse){
-            let r = airesponse.result2['data'];
-            let str_response = `<div class="row mt-5 ms-4">
+            let r1 = airesponse.result2['request'];
+            let r2 = airesponse.result2['data'];
+            let r3 = airesponse.result2['answer_audio'];
+
+            let a_text = `
+            <div class="row mt-3 me-3">
+            <div class="col-12">
+            <div class="btn btn-light btn-lg rounded-5 col-3 col-xl-2 text-start disabled" style="float:right;">
+            <h5 class="text-dark">${r1}</h5>
+            </div>
+            </div>
+            </div>`;
+            $('#communication').append(a_text);
+
+            let audio_response2  = `<div class="row mt-5 ms-4">
+                <div class="col-12" >
+                <audio controls src= "data:audio/mp3;base64,${r3}" ></audio>
+                </div>
+                </div>
+                </div>`; // `이거로
+            $('#communication').append(audio_response2);
+
+            let str_response = `<div class="row mt-3 ms-4">
                 <div class="col-12">
                 <div class="btn btn-light btn-lg rounded-5 col-3 col-xl-2 text-start disabled">
-                <h5 class="text-dark"> ${r}</h5>
+                <h5 class="text-dark"> ${r2}</h5>
                 </div>
                 </div>
                 </div>`; // `이거로

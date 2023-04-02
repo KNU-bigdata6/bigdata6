@@ -16,6 +16,13 @@ class User(UserMixin):
 
     def get_id(self):
         return str(self.id)
+    
+    def get_user_id(self):
+        return str(self.user_id)
+    
+    def get_user_info(self):
+        user = [self.user_id , self.name , self.gender]
+        return user
 
     # 회원 번호로 조회
     @staticmethod

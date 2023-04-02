@@ -18,7 +18,7 @@
 <body class="bg-dark">
 
 
-    <nav class="navbar navbar-expand-lg navbar-dark  border-bottom border-secondary">
+    <nav class="navbar navbar-dark  border-bottom border-secondary">
         <div class="container-fluid">
             <a class="navbar-brand text-secondary" href="{{ url_for('main.home') }}">MyAIFriend</a>
             <button class="navbar-toggler border-secondary " type="button"
@@ -33,13 +33,11 @@
                 <ul class="navbar-nav">
                     {% if login %}
                     <li class="nav-item align-self-center">
-                        <a class="nav-link disabled" >{{userid}}님 환영합니다.</a>
+                        <a class="nav-link" href="{{ url_for('info.myinfo') }}">Myinfo</a>
                     </li>
                     <li class="nav-item align-self-center">
                         <a class="nav-link" href="{{ url_for('main.logout') }}">Logout</a>
                     </li>
-                    <li class="nav-item align-self-center">
-
                     {% else %}
                     <li class="nav-item align-self-center">
                         <a class="nav-link" href="{{ url_for('main.join') }}">Sign up</a>
@@ -91,7 +89,7 @@
 
     <div class="row mt-5 ms-4 border-start">
         <div class="col-7">
-            <h1 class="text-white fw-bold">Let's ask AI</h1>
+            <h1 class="text-white fw-bold">Let's conversate AI</h1>
         </div>
     </div>
 

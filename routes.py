@@ -10,7 +10,7 @@ main = Blueprint('main', __name__, url_prefix='/')
 def home():
     # runserver의 user_loader가 호출됨 flask login이 http request에서 id를 자동으로 넣어줌
     if current_user.is_authenticated:
-        return render_template('home.html', userid=current_user.user_id, login=True)
+        return render_template('home.html', login=True)
     else:
         return render_template('home.html')
 

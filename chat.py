@@ -2,6 +2,10 @@ from flask import Flask, render_template, request, jsonify, make_response, Bluep
 from flask_login import current_user
 from service.user import User
 import speech_recognition as sr
+from gtts import gTTS
+import base64
+import json
+import os
 
 
 chat = Blueprint('chat', __name__, url_prefix='/test')
@@ -12,13 +16,25 @@ def business():
     if current_user.is_authenticated:
         if request.method == 'POST':
             tdata = request.get_json()
-            # 데이터 db넣고 처리한후 ai 응답 담기
-            User.record(current_user.user_id, tdata['question'], "굿")
-            ai = {"data": "굿"}
+            question = tdata['question']
+
+            # 답변 생성
+            answer = "답변"
+            answer_to_voice = gTTS(text=answer, lang="ko")
+            c_user_id = current_user.get_user_id()
+            answer_to_voice.save(f"./audio/{c_user_id}_{answer}.mp3")
+            with open(f"./audio/{c_user_id}_{answer}.mp3", "rb") as audio_file:
+                audio_binary = audio_file.read()
+                encoded_string = base64.b64encode(audio_binary)
+            os.remove(f"./audio/{c_user_id}_{answer}.mp3")
+            ai = {"data": answer, "answer_audio": encoded_string.decode()}
+
+            # 답변 DB저장
+            User.record(current_user.user_id,  question, answer)
             # ai db담기
             return jsonify(result="success", result2=ai)
         else:
-            return render_template('business.html', userid=current_user.user_id, login=True)
+            return render_template('business.html', login=True)
     else:
         # 경고문 띄우기
         flash("not login")
@@ -27,23 +43,33 @@ def business():
 
 @chat.route('/business/audio', methods=['GET', 'POST'])
 def audio():
-    if request.method == 'POST':
+    if request.method == 'POST' and current_user.is_authenticated:
         result = sr.AudioFile(request.files['audio'])
 
         r = sr.Recognizer()
         with result as source:
             audio = r.listen(source)
         try:
-            # 텍스트 처리 stt
+            # 텍스트 처리 stt, 추후 영어로 변경
             question = r.recognize_google(audio, language='ko')
-            print(question)
-            
             # 답변 생성
             answer = "답변"
-            
+            answer_to_voice = gTTS(text=answer, lang="ko")
+            c_user_id = current_user.get_user_id()
+            answer_to_voice.save(f"./audio/{c_user_id}_{answer}.mp3")
+
+            with open(f"./audio/{c_user_id}_{answer}.mp3", "rb") as audio_file:
+                audio_binary = audio_file.read()
+                encoded_string = base64.b64encode(audio_binary)
+            os.remove(f"./audio/{c_user_id}_{answer}.mp3")
+
+            ai = {"data": answer, "request": question,
+                "answer_audio": encoded_string.decode()}
+            print(encoded_string.decode())
+
             # 답변 전송
             User.record(current_user.user_id, question, answer)
-            ai = {"data": answer}
+
             return jsonify(result="success", result2=ai)
 
         except sr.UnknownValueError:

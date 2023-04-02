@@ -18,48 +18,54 @@
     </script>
 </head>
 <body class = "bg-dark text-center" style="height: 100%;">
-    <nav class="navbar navbar-dark  border-bottom border-secondary">
-        <div class="container-fluid">
-            <a class="navbar-brand text-secondary" href="{{ url_for('main.home') }}">MyAIFriend</a>
-            <button class="navbar-toggler border-secondary " type="button"
-                    data-bs-toggle="collapse"
-                    data-bs-target="#navbarSupportedContent"
-                    aria-controls="navbarSupportedContent"
-                    aria-expanded="false"
-                    aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
-                <ul class="navbar-nav align-self-center">
-                    <li class="nav-item">
+<nav class="navbar navbar-dark  border-bottom border-secondary">
+    <div class="container-fluid">
+        <a class="navbar-brand text-secondary" href="{{ url_for('main.home') }}">MyAIFriend</a>
+        <button class="navbar-toggler border-secondary " type="button"
+                data-bs-toggle="collapse"
+                data-bs-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent"
+                aria-expanded="false"
+                aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
+            <ul class="navbar-nav">
+                {% if login %}
+                    <li class="nav-item align-self-center">
+                        <a class="nav-link" href="{{ url_for('info.myinfo') }}">myinfo</a>
+                    </li>
+                    <li class="nav-item align-self-center">
+                        <a class="nav-link" href="{{ url_for('main.logout') }}">Logout</a>
+                    </li>
+
+                    {% else %}
+                    <li class="nav-item align-self-center">
                         <a class="nav-link" href="{{ url_for('main.join') }}">Sign up</a>
                     </li>
                     <li class="nav-item align-self-center">
                         <a class="nav-link" href="{{ url_for('main.login') }}">Sign in</a>
                     </li>
-                </ul>
-            </div>
+                {% endif %}
+            </ul>
         </div>
-    </nav>
+    </div>
+</nav>
 
 
     <div class = "container-fluid p-5 w-100" style="position: fixed; top:30%;">
 
         <h1 class="mb-5 text-secondary">MyAIFriend</h1>
 
-        <form name="login_form" method="POST" onSubmit="return false;">
-            <div class="form-group">
-            <div class=" col-5 col-xl-3 mb-1" style="float: none; margin: 0 auto">
-                <input type="text" class="form-control" id="userid" placeholder="UserID" name="userid"/>
-            </div>
-            </div>
+        <form name="delete_form" method="POST" onSubmit="return false;">
             <div class=" col-5 col-xl-3 mb-1" style="float: none; margin: 0 auto">
             <div class="form-group">
+                <h5 class="text-secondary">Input your password to delete account</h5>
                 <input type="password" class="form-control col-5 col-xl-3" id="password" placeholder="Password" name="password" onkeypress="capLock(event)"/>
             </div>
             </div>
 
-            <button onclick="login()" class="btn btn-outline-secondary btn-lg col-5 col-xl-3">Login</button>
+            <button onclick="deleteId()" class="btn btn-outline-secondary btn-lg col-5 col-xl-3">Delete</button>
             <div id="divMayus" class="text-secondary" style="visibility:hidden;font-size:10px;" >Caps Lock key is activated.</div>
         </form>
     </div>
@@ -77,12 +83,9 @@
             document.getElementById('divMayus2').style.visibility = 'hidden';
         }
     }
-    function login(){
-            var form = document.login_form;
-            if (form.userid.value == "") {
-                alert("enter data");
-            }
-            else if(form.password.value == ""){
+    function deleteId(){
+            var form = document.delete_form;
+            if(form.password.value == ""){
                 alert("enter data");
             }
             else{

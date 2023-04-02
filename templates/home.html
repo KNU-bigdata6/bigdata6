@@ -39,15 +39,15 @@
                     </li>
                     <li class="nav-item row text-center">
                         <a class="nav-link col-6 " href="{{ url_for('info.myinfo') }}">Myinfo</a>
-                        <a class="nav-link col-6 " href="{{ url_for('chat.life') }}">Life</a>
+                        <a class="nav-link col-6 " href="{{ url_for('chat.text', subject ='life') }}">Life</a>
                     </li>
                     <li class="nav-item row text-center">
                         <a class="nav-link col-6" href="{{ url_for('main.logout') }}">Logout</a>
-                        <a class="nav-link col-6" href="{{ url_for('chat.business') }}">Business</a>
+                        <a class="nav-link col-6" href="{{ url_for('chat.text', subject ='business') }}">Business</a>
                     </li>
                     <li class="nav-item row text-center">
                         <div class="nav-link col-6"></div>
-                        <a class="nav-link col-6 " href="{{ url_for('chat.study') }}">Study</a>
+                        <a class="nav-link col-6 " href="{{ url_for('chat.text', subject ='study') }}">Study</a>
                     </li>
 
                     {% else %}

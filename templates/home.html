@@ -13,6 +13,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="/static/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.1/font/bootstrap-icons.css">
+    <title>영어 회화</title>
 </head>
 
 <body class="bg-dark">
@@ -78,19 +79,19 @@
     <div class="row">
     <div class="col-12 text-center">
     <span>
-        <a href="{{ url_for('chat.life') }}" class="btn btn-outline-light col-2 col-xl-3 btn-lg rounded-5 m-5 text-start">
+        <a href="{{ url_for('chat.text', subject='life')}}" class="btn btn-outline-light col-2 col-xl-3 btn-lg rounded-5 m-5 text-start">
         <h5 class="text-white">Life</h5>
         <h6 class="text-opacity-75 text-secondary"> daily chatting  </h6>
         </a>
     </span>
     <span>
-        <a href="{{ url_for('chat.business') }}" class="btn btn-outline-light col-3 btn-lg rounded-5 m-5 text-start">
+        <a href="{{ url_for('chat.text', subject='business') }}" class="btn btn-outline-light col-3 btn-lg rounded-5 m-5 text-start">
         <h5 class="text-white">Business</h5>
         <h6 class="text-opacity-75 text-secondary"> business conversation </h6>
         </a>
     </span>
     <span>
-        <a href="{{ url_for('chat.study') }}" class="btn btn-outline-light col-2 col-xl-3 btn-lg rounded-5 m-5 text-start">
+        <a href="{{ url_for('chat.text', subject='study') }}" class="btn btn-outline-light col-2 col-xl-3 btn-lg rounded-5 m-5 text-start">
         <h5 class="text-white">Study</h5>
         <h6 class="text-opacity-75 text-secondary"> study chatting </h6>
         </a>

@@ -10,17 +10,17 @@ import os
 
 chat = Blueprint('chat', __name__, url_prefix='/test')
 
-
-@chat.route('/business', methods=['GET', 'POST'])
-def business():
+# 텍스트 대화처리
+@chat.route('/<subject>', methods=['GET', 'POST'])
+def text(subject):
     if current_user.is_authenticated:
         if request.method == 'POST':
             tdata = request.get_json()
             question = tdata['question']
 
             # 답변 생성
-            answer = "답변"
-            answer_to_voice = gTTS(text=answer, lang="ko")
+            answer = "request"
+            answer_to_voice = gTTS(text=answer, lang="en")
             c_user_id = current_user.get_user_id()
             answer_to_voice.save(f"./audio/{c_user_id}_{answer}.mp3")
             with open(f"./audio/{c_user_id}_{answer}.mp3", "rb") as audio_file:
@@ -34,15 +34,16 @@ def business():
             # ai db담기
             return jsonify(result="success", result2=ai)
         else:
-            return render_template('business.html', login=True)
+            return render_template(f'{subject}.html', login=True)
     else:
         # 경고문 띄우기
         flash("not login")
         return redirect(url_for('main.login'))
 
 
-@chat.route('/business/audio', methods=['GET', 'POST'])
-def audio():
+# 음성 대화처리
+@chat.route('/<subject>/audio', methods=['GET', 'POST'])
+def audio(subject):
     if request.method == 'POST' and current_user.is_authenticated:
         result = sr.AudioFile(request.files['audio'])
 
@@ -51,10 +52,10 @@ def audio():
             audio = r.listen(source)
         try:
             # 텍스트 처리 stt, 추후 영어로 변경
-            question = r.recognize_google(audio, language='ko')
+            question = r.recognize_google(audio, language='en')
             # 답변 생성
-            answer = "답변"
-            answer_to_voice = gTTS(text=answer, lang="ko")
+            answer = "request"
+            answer_to_voice = gTTS(text=answer, lang="en")
             c_user_id = current_user.get_user_id()
             answer_to_voice.save(f"./audio/{c_user_id}_{answer}.mp3")
 
@@ -80,39 +81,3 @@ def audio():
             print("Google 음성 인식 서비스에서 결과를 요청할 수 없습니다.; {0}".format(e))
             ai = {"data": "Google 음성 인식 서비스에서 결과를 요청할 수 없습니다."}
             return jsonify(result="success", result2=ai)
-
-
-@chat.route('/study', methods=['GET', 'POST'])
-def study():
-    if current_user.is_authenticated:
-        if request.method == 'POST':
-            tdata = request.get_json()
-            # 데이터 db넣고 처리한후 ai 응답 담기
-            User.record(current_user.user_id, tdata['question'], "굿")
-            ai = {"data": "굿"}
-            # ai db담기
-            return jsonify(result="success", result2=ai)
-        else:
-            return render_template('study.html', userid=current_user.user_id, login=True)
-    else:
-        # 경고문 띄우기
-        flash("not login")
-        return redirect(url_for('main.login'))
-
-
-@chat.route('/life', methods=['GET', 'POST'])
-def life():
-    if current_user.is_authenticated:
-        if request.method == 'POST':
-            tdata = request.get_json()
-            # 데이터 db넣고 처리한후 ai 응답 담기
-            User.record(current_user.user_id, tdata['question'], "굿")
-            ai = {"data": "굿"}
-            # ai db담기
-            return jsonify(result="success", result2=ai)
-        else:
-            return render_template('life.html', userid=current_user.user_id, login=True)
-    else:
-        # 경고문 띄우기
-        flash("not login")
-        return redirect(url_for('main.login'))

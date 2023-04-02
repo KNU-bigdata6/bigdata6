@@ -117,7 +117,7 @@
         document.getElementById("question").value ='';
         $.ajax({
             type:'POST',
-            url:'{{url_for("chat.life")}}',
+            url:'{{url_for("chat.text", subject="life")}}',
                         async : true,
             data: JSON.stringify(postdata),
             dataType : 'JSON',

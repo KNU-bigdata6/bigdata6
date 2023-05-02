@@ -3,6 +3,7 @@ from service.user import User
 from routes import main
 from chat import chat
 from myinfo import info
+from board import board
 from flask_login import LoginManager
 from datetime import timedelta
 
@@ -16,6 +17,7 @@ app.secret_key = "sdfieegrnqgono"
 app.register_blueprint(main)
 app.register_blueprint(chat)
 app.register_blueprint(info)
+app.register_blueprint(board)
 
 login_manager = LoginManager()
 login_manager.init_app(app)  # app 에 login_manager연결

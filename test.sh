@@ -8,5 +8,5 @@ if [ ! -d venv ]; then
 	pip install -r requirements.txt
 fi
 export FLASK_APP=runserver.py
-Flask run
+flask run
 

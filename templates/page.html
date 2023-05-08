@@ -7,7 +7,7 @@
     <link href="/static/css/blog-custom.css" rel="stylesheet">
     <script src="https://code.jquery.com/jquery-latest.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
-    <title>board</title>
+    <title>page</title>
   </head>
   <body class="bg-dark" style="height: 100%;">
     <nav class="navbar navbar-dark  border-bottom border-secondary">
@@ -44,38 +44,52 @@
   </nav>
 
 
-    <br>
+  <!-- 포스트 글 아직 구현 안함 -->
+  <br>
     <div class = "container">
-      <h1 class="mb-5 text-secondary">Teacher's Bulletin Board</h1>
-      <table class="table table-dark">
+    <h1 class=" text-secondary">Teacher's Bulletin Board</h1>
+      <table class="table text-white">
         <thead>
-          <tr class="table-active">
-            <th>번호</th>
-            <th>제목</th>
-            <th>글쓴이</th>
-            <th>작성일</th>
-          </tr> 
-        </thead>
-        <tbody>
-        {% for post in posts %}
-          {% set index = post.index | int %}
           <tr>
-            <td>{{ index }}</td>
-            <td><a href="{{ url_for('board.post', index=index)}}" >{{ post.title }} </a></td>
-            <td>{{ post.nickname }}</td>
-            <td>{{ post.date }}</td>
+            <th>작성자</th>
+            <td>작성자 이름</td>
           </tr>
-        {% endfor %}
-        </tbody>
+          <tr>
+            <th>작성일</th>
+            <td>작성일자</td>
+          </tr>
+        </thead>
       </table>
-      <div class="row">
-        <div class="col-9 col-md-9 col-lg-10">
-          {{ pagination.links }}
-        </div>
-        <div class="col-3 col-md-3 col-lg-2">
-          <a href="{{ url_for('board.write')}}" class="btn btn-secondary">글쓰기</a>
+      <div class="card custom-card">
+        <div class="card-body">
+          <h5 class="card-title">게시글 제목</h5>
+          <p class="card-text" style="height:400px">게시글 내용</p>
+          </p>
         </div>
       </div>
+  <!-- 댓글 목록 -->
+  <div class="card custom-card">
+    <div class="card-body">
+      <p class="card-title">전체 댓글 ~~개</p>
+      <div class="card mt-3">
+        <div class="card-body">
+          <p class="card-text">작성자 : 댓글 내용</p>
+        </div>
+      </div>
+      <!-- 댓글이 많으면 위와 같은 형태의 카드를 반복해서 표시 -->
     </div>
-  </body>
+  </div>
+  <!-- 댓글 폼 -->
+  <div class="card custom-card">
+    <div class="card-body">
+      <form>
+        <div class="form-group">
+          <label for="comment">작성자</label>
+          <textarea class="form-control" id="comment" rows="3"></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary">등록</button>
+      </form>
+    </div>
+  </div>
+</body>
 </html>

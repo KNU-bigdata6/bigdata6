@@ -69,28 +69,43 @@ POSTS = [
 ]
 
 # 페이지당 아이템 수
-PER_PAGE = 7
+PER_PAGE = 10
 
 @board.route('/')
 def main():
-  # 현재 페이지 가져오기
-  page = request.args.get(get_page_parameter(), type=int, default=1)
-  
-  # 페이징을 위해 변수 생성
-  start_idx = (page-1) * PER_PAGE
-  end_idx = start_idx + PER_PAGE
-  current_post = POSTS[start_idx:end_idx]
-  
-  pagination = Pagination(page=page, total=len(POSTS), per_page=PER_PAGE, css_framework='bootstrap4')
-  
-  return render_template("board.html", posts=current_post, pagination=pagination)
+  if current_user.is_authenticated:
+    # 현재 페이지 가져오기
+    page = request.args.get(get_page_parameter(), type=int, default=1)
+    
+    # 페이징을 위해 변수 생성
+    start_idx = (page-1) * PER_PAGE
+    end_idx = start_idx + PER_PAGE
+    current_post = POSTS[start_idx:end_idx]
+    
+    pagination = Pagination(page=page, total=len(POSTS), per_page=PER_PAGE, css_framework='bootstrap4')
+    
+    return render_template("board.html", posts=current_post, pagination=pagination, login=True)
+  else:
+    # 경고문 띄우기
+      flash("not login")
+      return redirect(url_for('main.login'))
 
 # 게시물
-@board.route('/post/<int:index>')
+@board.route('/page/<int:index>')
 def post(index):
-  return render_template("post.html", index=index)
+  if current_user.is_authenticated:
+    return render_template("page.html", index=index, login=True)
+  else:
+      # 경고문 띄우기
+      flash("not login")
+      return redirect(url_for('main.login'))
 
 # 게시물 등록
-@board.route('/post/write')
+@board.route('/page/write')
 def write():
-  return render_template("write.html")
+  if current_user.is_authenticated:
+    return render_template("write.html", login=True)
+  else:
+      # 경고문 띄우기
+      flash("not login")
+      return redirect(url_for('main.login'))

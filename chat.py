@@ -11,7 +11,7 @@ import requests
 chat = Blueprint('chat', __name__, url_prefix='/test')
 
 # 바뀔 수 있음
-NLP_SERVER_URL = "http://localhost:8000/"
+NLP_SERVER_URL = "http://localhost:8500/"
 
 # 대화기록 삭제 요청
 def reset_user_histories(subject, user_id):

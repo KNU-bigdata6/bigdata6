@@ -13,8 +13,9 @@ CREATE TABLE IF NOT EXISTS `test_userDB`.`userTBL` (
 
 CREATE TABLE IF NOT EXISTS `test_userDB`.`recordTBL` (
   `id` INT NOT NULL,
-  `answer` VARCHAR(50) NOT NULL,
-  `question` VARCHAR(50) NOT NULL,
+  `subject` VARCHAR(10) NOT NULL,
+  `answer` VARCHAR(500) NOT NULL,
+  `question` VARCHAR(500) NOT NULL,
   `date` DATETIME NOT NULL,
   CONSTRAINT `fk_recordTBL_userTBL`
     FOREIGN KEY (`id`)

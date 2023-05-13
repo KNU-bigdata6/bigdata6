@@ -10,7 +10,6 @@
 [Ll]ib
 [Ll]ib64
 [Ll]ocal
-[Ss]cripts
 pyvenv.cfg
 .venv
 pip-selfcheck.json
@@ -18,6 +17,7 @@ pip-selfcheck.json
 __pycache__/
 .DS_STORE
 .env
+.vscode
 ai/nlp/model/daily_medium_model.pt
 ai/nlp/model/business_small_model.pt
 

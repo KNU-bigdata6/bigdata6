@@ -1,0 +1,39 @@
+# 넘겨 받을 때 프록시 헤더 정보를 지정
+proxy_set_header X-Real-IP $remote_addr;
+proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+proxy_set_header Host $http_host;
+proxy_set_header X-Forwarded-Proto $scheme;
+proxy_set_header X-NginX-Proxy true;
+
+# 업로드 가능한 최대 용량
+# - default: 1M
+client_max_body_size 256M;
+# 클라이언트 버퍼 사이즈 (body 에 들어오는 사이즈)
+# - default: 32bit-8K, 64bit-16K
+client_body_buffer_size 1m;
+
+# 백엔드 서버로부터의 응답을 버퍼링할지 여부를 정의
+# - on: 버퍼가 제공하는 메모리 공간을 이용해 응답 데이터를 메모리에 저장
+# - off: 응답을 직접 클라이언트에게 전달
+proxy_buffering on;
+# 백엔드 서버로부터의 응답 데이터를 읽는 데 사용할 버퍼의 수와 크기를 설정
+proxy_buffers 4 256k;
+# 백엔드 서버 응답의 첫 부분을 읽기 위한 버퍼 크기를 설정 (주로 간단한 헤더 데이터가 포함)
+proxy_buffer_size 128k;
+# 버퍼가 여기서 지정한 값을 초과하면 데이터를 클라이언트로 보내고 버퍼를 비웁
+proxy_busy_buffers_size 256k;
+
+# 한번에 쓸 수 있는 임시 파일 용량
+proxy_temp_file_write_size 256k;
+# 최대 쓸 수 있는 임시파일 용량
+proxy_max_temp_file_size 1024m;
+
+# 백엔드 서버 접속 제한시간을 정의
+proxy_connect_timeout 300s;
+# 백엔드 서버로부터 데이터를 읽을 때의 제한시간
+proxy_send_timeout 300s;
+# 백엔드 서버로 데이터를 전송할 때의 제한시간
+proxy_read_timeout 300s;
+send_timeout 300s;
+# 백엔드 서버가 보내오는 모든 에러 페이지를 엔진엑스가 직접 클라이언트에게 회신
+proxy_intercept_errors on;

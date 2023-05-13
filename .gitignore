@@ -17,4 +17,10 @@ pip-selfcheck.json
 *.pyc
 __pycache__/
 .DS_STORE
+.env
+ai/nlp/model/daily_medium_model.pt
+ai/nlp/model/business_small_model.pt
+
+
 # End of https://www.toptal.com/developers/gitignore/api/venv
+

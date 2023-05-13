@@ -1,0 +1,115 @@
+{% with messages = get_flashed_messages() %}
+    {% if messages %}
+        <script>
+            alert("{{messages[-1]}}")
+        </script>
+    {% endif %}
+{% endwith %}
+
+<!DOCTYPE html>
+<html lang="ko" style="height: 100%;">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="../static/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous">
+    </script>
+    <title>내 정보</title>
+</head>
+<body class = "bg-dark text-secondary" style="height: 100%;">
+    {% include 'navbar.html' %}
+
+    <div class = "container">
+        <div class="row mt-5">
+            <h1>MyAIFriend</h1>
+        </div>
+
+        <div class="row mt-5">
+            <label>UserID</label>
+        </div>
+
+        <div class="row mt-0">
+        <div class="col-12">
+            <div class="btn btn-light btn-lg col-12 text-start disabled">
+                <h6 class="text-dark">{{user[0]}}</h6>
+            </div>
+        </div>
+        </div>
+
+
+
+
+        <div class="row mt-5">
+            <label>UserName</label>
+        </div>
+
+        <div class="row mt-0">
+        <div class="col-12">
+            <div class="btn btn-light btn-lg col-12 text-start disabled">
+                <h6 class="text-dark">{{user[1]}}</h6>
+            </div>
+        </div>
+        </div>
+        <form name="admin_form" action="{{ url_for('info.newpassword')}}" method="POST" onSubmit="return false;">
+        <div class="row mt-5">
+            <label>Current Password</label>
+        </div>
+
+        <div class="row mt-0">
+        <div class="col-10">
+            <input type="password" class="form-control" id="password1" placeholder="Password" maxlength="12" name="password1" onkeyup="p_check('password1')" onkeypress="capLock(event)" disabled/>
+            <div id="divMayus3" class="text-secondary" style="display: none; font-size:10px;" >영어 소문자,특수문자,숫자 1글자 이상, 최소 8글자 </div>
+            <div id="divMayus" class="text-secondary" style="display: none; font-size:10px;" >Caps Lock key is activated.</div>
+        </div>
+        <div class="col-2" id="change" style="display: block;">
+            <div class="btn btn-outline-secondary col-12 " onclick="Change()">Change</div>
+        </div>
+        <div class="col-2" id="submit" style="display: none;">
+            <div class="btn btn-outline-secondary col-12 " onclick="Submit()" >Submit</div>
+        </div>
+        </div>
+
+        <div id="change_password" style="display: none;">
+        <div class="row mt-5">
+            <label>New Password</label>
+        </div>
+        <div class="row mt-0">
+            <div class="col-12">
+                <input type="password" class="form-control" id="password2" placeholder="Password" maxlength="12" name="password2" onkeyup="p_check('password2')" onkeypress="capLock(event)" />
+                <div id="divMayus2" class="text-secondary" style="display: none; font-size:10px;" >Caps Lock key is activated.</div>
+            </div>
+        </div>
+
+        <div class="row mt-5">
+            <label> Confirm new Password</label>
+        </div>
+        <div class="row mt-0">
+            <div class="col-12">
+                <input type="password" class="form-control" id="password3" placeholder="Password" maxlength="12" name="password3" onkeyup="p_check2()" onkeypress="capLock(event)" />
+                <div id="divMayus4" class="text-secondary" style="display: none; font-size:10px;" >Caps Lock key is activated.</div>
+            </div>
+        </div>
+        </div>
+        </form>
+
+        <div class="row mt-5">
+            <label>Gender</label>
+        </div>
+
+        <div class="row mt-0">
+        <div class="col-12">
+            <div class="btn btn-light btn-lg col-12 text-start disabled">
+                <h6 class="text-dark">{{user[2]}}성</h6>
+            </div>
+        </div>
+        </div>
+
+
+
+        <a href="{{ url_for('info.withdrawal') }}" class=" mt-5 btn btn-outline-secondary justify-content-center btn-lg col-5 col-xl-3">Delete account</a>
+
+    </div>
+    <script src="../static/js/myinfo.js"></script>
+</body>
+</html>

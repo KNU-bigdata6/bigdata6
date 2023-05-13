@@ -1,0 +1,82 @@
+{% with messages = get_flashed_messages() %}
+    {% if messages %}
+        <script>
+            alert("{{messages[-1]}}")
+        </script>
+    {% endif %}
+{% endwith %}
+
+<!DOCTYPE html>
+<html lang="ko" style="height: 100%;">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="/static/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous">
+    </script>
+    <title>회원 가입</title>
+</head>
+<body class = "bg-dark text-secondary" style="height: 100%;">
+    {% include 'navbar.html' %}
+
+    <div class = "container">
+        <div class="row mt-5">
+            <h1>MyAIFriend</h1>
+        </div>
+        <div class="row mt-5">
+        <div class="col-12">
+            <form name="admin_form" method="POST" onSubmit="return false;">
+                <div class="form-group">
+                    <label for="userid">UserID</label>
+                <div class="row">
+                    <div class="col-10">
+                        <input type="text" class="form-control" id="userid" placeholder="UserID" name="userid" maxlength="9"/>
+                    </div>
+                    <div class="col-2">
+                        <p><input type = "button" class="form-control text-light bg-dark" onclick="check()" value="Check"></p>
+                    </div>
+                </div>
+            </div>
+                <div class="form-group mt-4">
+                    <label for="username">Username</label>
+                    <input type="text" class="form-control" id="username" placeholder="Username" name="name" maxlength="4" onkeyup="onlykorean()"/>
+                </div>
+                <div class="form-group mt-5">
+                    <label for="password">Password</label>
+                    <input type="password" class="form-control" id="password" placeholder="Password" maxlength="12" name="password" onkeyup="p_check()" onkeypress="capLock(event)"/>
+                    <div id="divMayus3" class="text-secondary" style="visibility: visible; display: inline; font-size:10px;" >영어 소문자,특수문자,숫자 1글자 이상, 최소 8글자 </div>
+                    <div id="divMayus" class="text-secondary" style="visibility: hidden; font-size:10px;" >Caps Lock key is activated.</div>
+                </div>
+                <div class="form-group mt-4">
+                    <label for="password2">Confirm new Password</label>
+                    <input type="password" class="form-control" id="password2" placeholder="Confirm new Password" name="password2" maxlength="12" onkeyup="p_check2()" onkeypress="capLock(event)" />
+                    <div id="divMayus2" class="text-secondary" style="visibility:hidden; font-size:10px;" >Caps Lock key is activated.</div>
+                </div>
+                <div class="row mt-5">
+                <p> Gender </p>
+                <div class="col-6">
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="gender" value = "Male" id="male" checked>
+                    <label class="form-check-label" for="male">
+                        Male
+                    </label>
+                </div>
+                </div>
+
+                <div class="col-6">
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="gender" value = "Female" id="female">
+                    <label class="form-check-label" for="female">
+                        Female
+                    </label>
+                </div>
+            </div>
+            </div>
+                <button onclick="admin()" class=" mt-5 btn btn-outline-secondary btn-lg col-5 col-xl-3">Admin</button>
+            </form>
+        </div>
+        </div>
+        <script src="/static/js/join.js"></script>
+</body>
+</html>

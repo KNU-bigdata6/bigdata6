@@ -1,0 +1,69 @@
+version: "3.7"
+services:
+  flask:
+    build: ./flask
+    container_name: app
+    environment:
+      - TZ=Asia/Seoul
+    ports:
+      - "8001:8000"
+    command: gunicorn --config gunicorn.config.tcp.py 'app:create_app()'
+    networks:
+      default_bridge:
+        ipv4_address: 172.18.0.2
+
+
+  database:
+    build: ./database
+    command: ['mysqld', '--character-set-server=utf8mb4', '--collation-server=utf8mb4_unicode_ci']
+    restart: always
+    environment:
+      - TZ=Asia/Seoul
+    env_file: .env
+    ports:
+      - "3307:3306"
+    expose:
+      - '3306'
+    volumes:
+      - mysql-data:/var/lib/mysql
+    networks:
+      default_bridge:
+        ipv4_address: 172.18.0.3
+
+
+  nginx:
+    build: ./nginx
+    container_name: nginx
+    environment:
+      - TZ=Asia/Seoul
+    restart: always
+    ports:
+      - "80:80"
+    depends_on:
+      - flask
+    networks:
+      default_bridge:
+        ipv4_address: 172.18.0.4
+
+  ai:
+    build: ./ai
+    container_name: ai
+    environment:
+      - TZ=Asia/Seoul
+    ports:
+      - "8003:8002"
+    command: gunicorn --config gunicorn.config.tcp.py 'nlp:create_app()'
+    networks:
+      default_bridge:
+        ipv4_address: 172.18.0.5
+
+
+volumes:
+  mysql-data:
+
+networks:
+  default_bridge:
+    ipam:
+      driver: default
+      config:
+        - subnet: 172.18.0.0/16

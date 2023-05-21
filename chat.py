@@ -20,7 +20,7 @@ def reset_user_histories(subject, user_id):
     
 # 자연어 처리 모델 추론 요청
 def NLP_request(subject, user_id, question):
-    url = "http://localhost:8000/" + subject + "/predict"
+    url = NLP_SERVER_URL + subject + "/predict"
     response = requests.post(url, data={'user_id': user_id, 'user_input' : question})
     return response.text
 

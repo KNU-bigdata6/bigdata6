@@ -123,13 +123,12 @@ class User(UserMixin):
     
     # 회원 대화 기록 저장
     @staticmethod
-    def record(user_id, question, answer):
+    def record(subject, user_id, question, answer):
         conn_db(USER_DB)
 
         # 회원 번호 조회
         user = User.find_member(user_id)
         id = user.id
-        sql = RecordQuery.save(id, question, answer,
+        sql = RecordQuery.save(id, subject, question, answer,
                             datetime.now().strftime('%Y-%m-%d %H:%M:%S'))
         USER_DB.execute(sql)
-    

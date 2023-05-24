@@ -39,9 +39,8 @@
                         <div class="nav-link col-4 border-bottom border-secondary text-light">Teacher's Bulletin Board</div>
                     </li>
                     <li class="nav-item row text-center">
-                        <a class="nav-link col-4 " href="{{ url_for('info.myinfo') }}">Myinfo</a>
-                        <a class="nav-link col-4 " href="{{ url_for('chat.text', subject ='life') }}">Life</a>
-                        <a class="nav-link col-4"  href="{{ url_for('board.main') }}">Board</a>
+                        <a class="nav-link col-6 " href="{{ url_for('info.myinfo') }}">Myinfo</a>
+                        <a class="nav-link col-6 " href="{{ url_for('chat.text', subject ='daily') }}">Life</a>
                     </li>
                     <li class="nav-item row text-center">
                         <a class="nav-link col-4" href="{{ url_for('main.logout') }}">Logout</a>
@@ -49,9 +48,8 @@
                         <a class="nav-link col-4"  href="{{ url_for('board.write') }}">Write</a>
                     </li>
                     <li class="nav-item row text-center">
-                        <div class="nav-link col-4"></div>
-                        <a class="nav-link col-4" href="{{ url_for('chat.text', subject ='study') }}">Study</a>
-                        <div class="nav-link col-4"></div>
+                        <div class="nav-link col-6"></div>
+                        <a class="nav-link col-6 " href="{{ url_for('chat.text', subject ='empathy') }}">Empathy</a>
                     </li>
                     {% else %}
                     <li class="nav-item align-self-center">
@@ -82,21 +80,21 @@
     <div class="row">
     <div class="col-12 text-center">
     <span>
-        <a href="{{ url_for('chat.text', subject='life')}}" class="btn btn-outline-light col-2 col-xl-3 btn-lg rounded-5 m-5 text-start">
+        <a href="{{ url_for('chat.text', subject='daily')}}" class="btn btn-outline-light col-2 col-xl-3 btn-lg rounded-5 m-5 text-start">
         <h5 class="text-white">Life</h5>
-        <h6 class="text-opacity-75 text-secondary"> daily chatting  </h6>
+        <h6 class="text-opacity-75 text-secondary"> Daily chatting  </h6>
         </a>
     </span>
     <span>
         <a href="{{ url_for('chat.text', subject='business') }}" class="btn btn-outline-light col-3 btn-lg rounded-5 m-5 text-start">
         <h5 class="text-white">Business</h5>
-        <h6 class="text-opacity-75 text-secondary"> business conversation </h6>
+        <h6 class="text-opacity-75 text-secondary"> Business conversation </h6>
         </a>
     </span>
     <span>
-        <a href="{{ url_for('chat.text', subject='study') }}" class="btn btn-outline-light col-2 col-xl-3 btn-lg rounded-5 m-5 text-start">
-        <h5 class="text-white">Study</h5>
-        <h6 class="text-opacity-75 text-secondary"> study chatting </h6>
+        <a href="{{ url_for('chat.text', subject='empathy') }}" class="btn btn-outline-light col-2 col-xl-3 btn-lg rounded-5 m-5 text-start">
+        <h5 class="text-white">Empathy</h5>
+        <h6 class="text-opacity-75 text-secondary"> Empathy chatting </h6>
         </a>
     </span>
     </div>

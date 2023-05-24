@@ -22,30 +22,38 @@
               <span class="navbar-toggler-icon"></span>
           </button>
           <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
-              <ul class="navbar-nav">
-                  {% if login %}
-                  <li class="nav-item align-self-center">
-                      <a class="nav-link" href="{{ url_for('info.myinfo') }}">Myinfo</a>
-                  </li>
-                  <li class="nav-item align-self-center">
-                      <a class="nav-link" href="{{ url_for('main.logout') }}">Logout</a>
-                  </li>
-                  {% else %}
-                  <li class="nav-item align-self-center">
-                      <a class="nav-link" href="{{ url_for('main.join') }}">Sign up</a>
-                  </li>
-                  <li class="nav-item align-self-center">
-                      <a class="nav-link" href="{{ url_for('main.login') }}">Sign in</a>
-                  </li>
-                  {% endif %}
-              </ul>
-          </div>
+            <ul class="navbar-nav">
+                {% if login %}
+                <li class="nav-item row text-center">
+                    <div class="nav-link col-6 border-bottom border-secondary text-light">Account</div>
+                    <div class="nav-link col-6 border-bottom border-secondary text-light">Teacher's Bulletin Board</div>
+                </li>
+                <li class="nav-item row text-center">
+                    <a class="nav-link col-6 " href="{{ url_for('info.myinfo') }}">Myinfo</a>
+                    <a class="nav-link col-6"  href="{{ url_for('board.main') }}">Board</a>
+                </li>
+                <li class="nav-item row text-center">
+                    <a class="nav-link col-6" href="{{ url_for('main.logout') }}">Logout</a>
+                    <a class="nav-link col-6"  href="{{ url_for('board.write') }}">Write</a>
+                </li>
+                <li class="nav-item row text-center">
+                    <div class="nav-link col-6"></div>
+                    <a class="nav-link col-6 " href="{{ url_for('board.interests') }}">Interests</a>
+                </li>
+                {% else %}
+                <li class="nav-item align-self-center">
+                    <a class="nav-link" href="{{ url_for('main.join') }}">Sign up</a>
+                </li>
+                <li class="nav-item align-self-center">
+                    <a class="nav-link" href="{{ url_for('main.login') }}">Sign in</a>
+                </li>
+                {% endif %}
+            </ul>
+        </div>
       </div>
   </nav>
 
-
-    <br>
-    <div class = "container">
+    <div class = "container mt-3">
       <h1 class="mb-5 text-secondary">Teacher's Bulletin Board</h1>
       <table class="table table-dark">
         <thead>
@@ -54,6 +62,7 @@
             <th>제목</th>
             <th>글쓴이</th>
             <th>작성일</th>
+            <th>조회수</th>
           </tr> 
         </thead>
         <tbody>
@@ -62,8 +71,9 @@
           <tr>
             <td>{{ index }}</td>
             <td><a href="{{ url_for('board.post', index=index)}}" >{{ post.title }} </a></td>
-            <td>{{ post.nickname }}</td>
+            <td>{{ post.name }}</td>
             <td>{{ post.date }}</td>
+            <td>{{ post.view }}</td>
           </tr>
         {% endfor %}
         </tbody>

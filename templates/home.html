@@ -39,8 +39,9 @@
                         <div class="nav-link col-4 border-bottom border-secondary text-light">Teacher's Bulletin Board</div>
                     </li>
                     <li class="nav-item row text-center">
-                        <a class="nav-link col-6 " href="{{ url_for('info.myinfo') }}">Myinfo</a>
-                        <a class="nav-link col-6 " href="{{ url_for('chat.text', subject ='daily') }}">Life</a>
+                        <a class="nav-link col-4 " href="{{ url_for('info.myinfo') }}">Myinfo</a>
+                        <a class="nav-link col-4 " href="{{ url_for('chat.text', subject ='daily') }}">Life</a>
+                        <a class="nav-link col-4"  href="{{ url_for('board.main') }}">Board</a>
                     </li>
                     <li class="nav-item row text-center">
                         <a class="nav-link col-4" href="{{ url_for('main.logout') }}">Logout</a>
@@ -48,8 +49,9 @@
                         <a class="nav-link col-4"  href="{{ url_for('board.write') }}">Write</a>
                     </li>
                     <li class="nav-item row text-center">
-                        <div class="nav-link col-6"></div>
-                        <a class="nav-link col-6 " href="{{ url_for('chat.text', subject ='empathy') }}">Empathy</a>
+                        <div class="nav-link col-4"></div>
+                        <a class="nav-link col-4 " href="{{ url_for('chat.text', subject ='empathy') }}">Empathy</a>
+                        <a class="nav-link col-4 " href="{{ url_for('board.interests') }}">Interests</a>
                     </li>
                     {% else %}
                     <li class="nav-item align-self-center">

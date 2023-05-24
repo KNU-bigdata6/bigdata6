@@ -6,66 +6,7 @@ board = Blueprint('board', __name__, url_prefix='/board')
 
 # 게시물 데이터(임시 - db 수정 헤야함)
 POSTS = [
-  {'index' : 1, 'title' : '제목 1', 'nickname' : '닉네임 1', 'date' : '2023-01-01'},
-  {'index' : 1, 'title' : '제목 2', 'nickname' : '닉네임 2', 'date' : '2023-01-01'},
-  {'index' : 1, 'title' : '제목 3', 'nickname' : '닉네임 3', 'date' : '2023-01-01'},
-  {'index' : 1, 'title' : '제목 4', 'nickname' : '닉네임 4', 'date' : '2023-01-01'},
-  {'index' : 1, 'title' : '제목 5', 'nickname' : '닉네임 5', 'date' : '2023-01-01'},
-  {'index' : 1, 'title' : '제목 6', 'nickname' : '닉네임 6', 'date' : '2023-01-01'},
-  {'index' : 1, 'title' : '제목 7', 'nickname' : '닉네임 7', 'date' : '2023-01-01'},
-  {'index' : 1, 'title' : '제목 8', 'nickname' : '닉네임 8', 'date' : '2023-01-01'},
-  {'index' : 1, 'title' : '제목 9', 'nickname' : '닉네임 9', 'date' : '2023-01-01'},
-  {'index' : 1, 'title' : '제목 10', 'nickname' : '닉네임 10', 'date' : '2023-01-01'},
-  {'index' : 1, 'title' : '제목 11', 'nickname' : '닉네임 11', 'date' : '2023-01-01'},
-  {'index' : 1, 'title' : '제목 12', 'nickname' : '닉네임 12', 'date' : '2023-01-01'},
-  {'index' : 1, 'title' : '제목 13', 'nickname' : '닉네임 13', 'date' : '2023-01-01'},
-  {'index' : 1, 'title' : '제목 14', 'nickname' : '닉네임 14', 'date' : '2023-01-01'},
-  {'index' : 1, 'title' : '제목 15', 'nickname' : '닉네임 15', 'date' : '2023-01-01'},
-  {'index' : 1, 'title' : '제목 16', 'nickname' : '닉네임 16', 'date' : '2023-01-01'},
-  {'index' : 1, 'title' : '제목 17', 'nickname' : '닉네임 17', 'date' : '2023-01-01'},
-  {'index' : 1, 'title' : '제목 18', 'nickname' : '닉네임 18', 'date' : '2023-01-01'},
-  {'index' : 1, 'title' : '제목 19', 'nickname' : '닉네임 19', 'date' : '2023-01-01'},
-  {'index' : 1, 'title' : '제목 20', 'nickname' : '닉네임 20', 'date' : '2023-01-01'},
-  {'index' : 1, 'title' : '제목 1', 'nickname' : '닉네임 1', 'date' : '2023-01-01'},
-  {'index' : 1, 'title' : '제목 2', 'nickname' : '닉네임 2', 'date' : '2023-01-01'},
-  {'index' : 1, 'title' : '제목 3', 'nickname' : '닉네임 3', 'date' : '2023-01-01'},
-  {'index' : 1, 'title' : '제목 4', 'nickname' : '닉네임 4', 'date' : '2023-01-01'},
-  {'index' : 1, 'title' : '제목 5', 'nickname' : '닉네임 5', 'date' : '2023-01-01'},
-  {'index' : 1, 'title' : '제목 6', 'nickname' : '닉네임 6', 'date' : '2023-01-01'},
-  {'index' : 1, 'title' : '제목 7', 'nickname' : '닉네임 7', 'date' : '2023-01-01'},
-  {'index' : 1, 'title' : '제목 8', 'nickname' : '닉네임 8', 'date' : '2023-01-01'},
-  {'index' : 1, 'title' : '제목 9', 'nickname' : '닉네임 9', 'date' : '2023-01-01'},
-  {'index' : 1, 'title' : '제목 10', 'nickname' : '닉네임 10', 'date' : '2023-01-01'},
-  {'index' : 1, 'title' : '제목 11', 'nickname' : '닉네임 11', 'date' : '2023-01-01'},
-  {'index' : 1, 'title' : '제목 12', 'nickname' : '닉네임 12', 'date' : '2023-01-01'},
-  {'index' : 1, 'title' : '제목 13', 'nickname' : '닉네임 13', 'date' : '2023-01-01'},
-  {'index' : 1, 'title' : '제목 14', 'nickname' : '닉네임 14', 'date' : '2023-01-01'},
-  {'index' : 1, 'title' : '제목 15', 'nickname' : '닉네임 15', 'date' : '2023-01-01'},
-  {'index' : 1, 'title' : '제목 16', 'nickname' : '닉네임 16', 'date' : '2023-01-01'},
-  {'index' : 1, 'title' : '제목 17', 'nickname' : '닉네임 17', 'date' : '2023-01-01'},
-  {'index' : 1, 'title' : '제목 18', 'nickname' : '닉네임 18', 'date' : '2023-01-01'},
-  {'index' : 1, 'title' : '제목 19', 'nickname' : '닉네임 19', 'date' : '2023-01-01'},
-  {'index' : 1, 'title' : '제목 20', 'nickname' : '닉네임 20', 'date' : '2023-01-01'},
-  {'index' : 1, 'title' : '제목 1', 'nickname' : '닉네임 1', 'date' : '2023-01-01'},
-  {'index' : 1, 'title' : '제목 2', 'nickname' : '닉네임 2', 'date' : '2023-01-01'},
-  {'index' : 1, 'title' : '제목 3', 'nickname' : '닉네임 3', 'date' : '2023-01-01'},
-  {'index' : 1, 'title' : '제목 4', 'nickname' : '닉네임 4', 'date' : '2023-01-01'},
-  {'index' : 1, 'title' : '제목 5', 'nickname' : '닉네임 5', 'date' : '2023-01-01'},
-  {'index' : 1, 'title' : '제목 6', 'nickname' : '닉네임 6', 'date' : '2023-01-01'},
-  {'index' : 1, 'title' : '제목 7', 'nickname' : '닉네임 7', 'date' : '2023-01-01'},
-  {'index' : 1, 'title' : '제목 8', 'nickname' : '닉네임 8', 'date' : '2023-01-01'},
-  {'index' : 1, 'title' : '제목 9', 'nickname' : '닉네임 9', 'date' : '2023-01-01'},
-  {'index' : 1, 'title' : '제목 10', 'nickname' : '닉네임 10', 'date' : '2023-01-01'},
-  {'index' : 1, 'title' : '제목 11', 'nickname' : '닉네임 11', 'date' : '2023-01-01'},
-  {'index' : 1, 'title' : '제목 12', 'nickname' : '닉네임 12', 'date' : '2023-01-01'},
-  {'index' : 1, 'title' : '제목 13', 'nickname' : '닉네임 13', 'date' : '2023-01-01'},
-  {'index' : 1, 'title' : '제목 14', 'nickname' : '닉네임 14', 'date' : '2023-01-01'},
-  {'index' : 1, 'title' : '제목 15', 'nickname' : '닉네임 15', 'date' : '2023-01-01'},
-  {'index' : 1, 'title' : '제목 16', 'nickname' : '닉네임 16', 'date' : '2023-01-01'},
-  {'index' : 1, 'title' : '제목 17', 'nickname' : '닉네임 17', 'date' : '2023-01-01'},
-  {'index' : 1, 'title' : '제목 18', 'nickname' : '닉네임 18', 'date' : '2023-01-01'},
-  {'index' : 1, 'title' : '제목 19', 'nickname' : '닉네임 19', 'date' : '2023-01-01'},
-  {'index' : 1, 'title' : '제목 20', 'nickname' : '닉네임 20', 'date' : '2023-01-01'}
+  {'index' : 1, 'title' : '제목 2', 'name' : '닉네임 2', 'date' : '2023-01-01', 'view' : 1}
 ]
 
 # 페이지당 아이템 수
@@ -101,11 +42,21 @@ def post(index):
       return redirect(url_for('main.login'))
 
 # 게시물 등록
-@board.route('/page/write')
+@board.route('/page/write', methods=['GET', 'POST'])
 def write():
   if current_user.is_authenticated:
-    return render_template("write.html", login=True)
+    if request.method == 'GET':
+      return render_template("write.html", login=True)
+    else:
+      print()
+      index = 1
+      return redirect(url_for('board.post', index=index))
   else:
       # 경고문 띄우기
       flash("not login")
       return redirect(url_for('main.login'))
+    
+#관심 목록
+@board.route('/page/interests')
+def interests():
+  return "내 관심 리스트"

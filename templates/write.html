@@ -60,23 +60,23 @@
               <input type="text" id="title" name="title" class="form-control" placeholder="제목을 입력하세요">
           </div>
           <div class="row">
-              <div class="col-md-6">
-                  <div class="form-group">
-                      <label for="citySelect">지역</label>
-                      <select class="form-select" id="citySelect" onchange="loadDistricts()">
-                          <option value="">지역을 선택하세요</option>
-                      </select>
-                  </div>
-              </div>
-              <div class="col-md-6">
-                  <div class="form-group">
-                      <label for="districtSelect">구군</label>
-                      <select class="form-select" id="districtSelect">
-                          <option value="">구군을 선택하세요</option>
-                      </select>
-                  </div>
-              </div>  
-          </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="citySelect">지역</label>
+                    <select name="city" class="form-select" id="citySelect" onchange="loadDistricts()">
+                        <option value="">지역을 선택하세요</option>
+                    </select>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="districtSelect">구군</label>
+                    <select name="district" class="form-select" id="districtSelect">
+                        <option value="">구군을 선택하세요</option>
+                    </select>
+                </div>
+            </div>  
+        </div>
           <div class="form-group">
               <label for="contents">내용</label>
               <textarea id="summernote" name="contents" class="form-control"></textarea>
@@ -117,6 +117,8 @@
           alert('지역과 구군을 모두 선택해주세요.');
           return false;
         }
+        
+        return true;
       }
       
       var jsonData = {

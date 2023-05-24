@@ -27,14 +27,17 @@ CREATE TABLE IF NOT EXISTS `test_userDB`.`recordTBL` (
 
 -- 게시글 테이블
 CREATE TABLE IF NOT EXISTS `test_userDB`.`postTBL` (
-  `index` INT NOT NULL AUTO_INCREMENT,
+  `idx` INT NOT NULL AUTO_INCREMENT,
   `id` INT NOT NULL,
+  `userid` VARCHAR(10) NOT NULL,
   `title` VARCHAR(100) NOT NULL,
   `content` TEXT NOT NULL,
   `name` VARCHAR(4) NOT NULL,
   `views` INT NOT NULL DEFAULT 0,
   `date` DATETIME NOT NULL,
-  PRIMARY KEY (`index`),
+  `city` VARCHAR(20) NOT NULL,
+  `district` VARCHAR(20) NOT NULL,
+  PRIMARY KEY (`idx`),
   CONSTRAINT `fk_postTBL_userTBL1`
     FOREIGN KEY (`id`)
     REFERENCES `test_userDB`.`userTBL` (`id`)
@@ -43,20 +46,21 @@ CREATE TABLE IF NOT EXISTS `test_userDB`.`postTBL` (
 
 -- 댓글 테이블
 CREATE TABLE IF NOT EXISTS `test_userDB`.`commentTBL` (
-  `index` INT NOT NULL,
+  `idx` INT NOT NULL,
   `id` INT NOT NULL,
+  `userid` INT NOT NULL,
   `text` TEXT NOT NULL,
   `name` VARCHAR(4) NOT NULL,
   `date` DATETIME NOT NULL,
   INDEX `fk_commentTBL_userTBL1_idx` (`id` ASC) VISIBLE,
-  INDEX `fk_commentTBL_postTBL1_idx` (`index` ASC) VISIBLE,
+  INDEX `fk_commentTBL_postTBL1_idx` (`idx` ASC) VISIBLE,
   CONSTRAINT `fk_commentTBL_userTBL1`
     FOREIGN KEY (`id`)
     REFERENCES `test_userDB`.`userTBL` (`id`)
     ON DELETE CASCADE
     ON UPDATE CASCADE,
   CONSTRAINT `fk_commentTBL_postTBL1`
-    FOREIGN KEY (`index`)
-    REFERENCES `test_userDB`.`postTBL` (`index`)
+    FOREIGN KEY (`idx`)
+    REFERENCES `test_userDB`.`postTBL` (`idx`)
     ON DELETE CASCADE
     ON UPDATE CASCADE);

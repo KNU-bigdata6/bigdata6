@@ -51,7 +51,7 @@
             </ul>
         </div>
       </div>
-  </nav>
+  </nav>  
 
     <div class = "container mt-3">
       <h1 class="mb-5 text-secondary">Teacher's Bulletin Board</h1>
@@ -67,13 +67,13 @@
         </thead>
         <tbody>
         {% for post in posts %}
-          {% set index = post.index | int %}
           <tr>
-            <td>{{ index }}</td>
-            <td><a href="{{ url_for('board.post', index=index)}}" >{{ post.title }} </a></td>
-            <td>{{ post.name }}</td>
-            <td>{{ post.date }}</td>
-            <td>{{ post.view }}</td>
+            <!-- 0 : 게시글 번호, 3: 제목, 2: 아이디, 5 : 작성자 9: 날짜/시간, 8 : 조회수-->
+            <td>{{post[0] }}</td>
+            <td><a href="{{ url_for('board.post', index=post[0])}}" >{{ post[3] }} </a></td>
+            <td>{{ post[5] + " (" + post[2] + ")"}}</td>
+            <td>{{ post[9].strftime('%Y-%m-%d') }}</td>
+            <td>{{ post[8] }}</td>
           </tr>
         {% endfor %}
         </tbody>

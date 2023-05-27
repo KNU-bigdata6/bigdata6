@@ -36,10 +36,6 @@
                     <a class="nav-link col-6" href="{{ url_for('main.logout') }}">Logout</a>
                     <a class="nav-link col-6"  href="{{ url_for('board.write') }}">Write</a>
                 </li>
-                <li class="nav-item row text-center">
-                    <div class="nav-link col-6"></div>
-                    <a class="nav-link col-6 " href="{{ url_for('board.interests') }}">Interests</a>
-                </li>
                 {% else %}
                 <li class="nav-item align-self-center">
                     <a class="nav-link" href="{{ url_for('main.join') }}">Sign up</a>
@@ -58,24 +54,47 @@
       <table class="table text-white mt-3">
         <thead>
           <tr>
-            <th>작성자</th>
-            <td>작성자 이름</td>
+            <th>작성자 (아이디)</th>
+            <td colspan=6>{{ name + ' (' + user_id + ')'}}</td>
           </tr>
           <tr>
             <th>작성일</th>
-            <td>작성일자</td>
+            <td colspan=6>{{ date }}</td>
           </tr>
           <tr>
+            <th>지역</th>
+            <td>{{ city }}</td>
+            <th>구군</th>
+            <td>{{ district }}</td>
             <td>조회수</td>
-            <td>10</td>
+            <td>{{ views }}</td>
           </tr>
         </thead>
       </table>
       <div class="card custom-card">
-        <div class="card-body">
-          <h5 class="card-title">게시글 제목</h5>
-          <p class="card-text" style="height:400px">게시글 내용</p>
-          </p>
+        <div class="card-body" >
+          <h5 class="card-title">{{ title }}</h5>
+          <div class="card mt-3">
+            <div class="card-body" style="min-height: 500px;">
+            <div class="card-text">
+              {{ content | safe }}
+            </div>
+          </div>
+        </div>
+        {%if user_id == current_user.user_id %}
+          <div class="row justify-content-end mt-3">
+            <div class="col-auto">
+              <form action="{{ url_for('board.edit', index=index) }}" method="POST">
+                <button class="btn btn-warning" type="submit">글수정</button>
+              </form>
+            </div>
+            <div class="col-auto">
+              <form action="{{ url_for('board.delete', index=index) }}" method="POST" onsubmit="return confirm('정말로 글을 삭제하시겠습니까?');">
+                <button class="btn btn-danger" type="submit">글삭제</button>
+              </form>
+            </div>
+          </div>
+        {% endif %}
         </div>
       </div>
   <!-- 댓글 목록 -->
@@ -93,12 +112,12 @@
   <!-- 댓글 폼 -->
   <div class="card custom-card mt-3">
     <div class="card-body">
-      <form>
+      <form atcion="/" method="POST">
         <div class="form-group">
-          <label for="comment">작성자</label>
-          <textarea class="form-control" id="comment" rows="3"></textarea>
+          <label for="comment">{{ cur_name + " (" + cur_user_id + ")"}}</label>
+          <textarea class="form-control mt-3" id="comment" rows="3"></textarea>
         </div>
-        <button type="submit" class="btn btn-primary">등록</button>
+        <button type="submit" class="btn btn-primary mt-3 float-md-end">등록</button>
       </form>
     </div>
   </div>

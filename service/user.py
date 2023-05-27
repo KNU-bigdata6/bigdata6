@@ -87,7 +87,7 @@ class User(UserMixin):
             )
             return user
 
-    # 회원 탈퇴 (아직 사용 X)
+    # 회원 탈퇴 
     @staticmethod
     def withdrawal(id):
         conn_db(USER_DB)

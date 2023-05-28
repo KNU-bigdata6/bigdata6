@@ -67,7 +67,7 @@
           <tr>
             <!-- 0 : 게시글 번호, 3: 제목, 2: 아이디, 5 : 작성자 9: 날짜/시간, 8 : 조회수-->
             <td>{{ post[0] }}</td>
-            <td>{{ post[6] + " (" + post[7] + ")"}}</td>
+            <td>{{ post[6]}} ({{post[7]}})</td>
             <td><a href="{{ url_for('board.post', index=post[0])}}" ><strong>{{ post[3] }}</strong> <span style="color: #FFA500;">({{ post[10]|string }})</span></a></td>
             <td><strong>{{post[5]}}</strong>({{post[2]}})</td>
             <td>{{ post[9].strftime('%Y-%m-%d') }}</td>

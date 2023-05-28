@@ -8,31 +8,39 @@ class BoardQuery():
   # 게시물 전체 조회 쿼리
   @staticmethod
   def find_all():
-    sql = f"SELECT * FROM postTBL"
+    sql = f"""SELECT postTBL.*,
+              COUNT(commentTBL.comment_num) AS comment_count
+              FROM postTBL
+              LEFT JOIN commentTBL ON postTBL.idx = commentTBL.idx
+              GROUP BY postTBL.idx"""
     return sql
   
-  # 게시물 전체 조회 쿼리
+  # 게시물 검색 조회 쿼리
   @staticmethod
-  def find_all_by_name(query):
-    sql = f"SELECT * FROM postTBL WHERE name LIKE '%{query}%'"
+  def find_all_by_category(category, query):
+    sql = f"""SELECT postTBL.*,
+              COUNT(commentTBL.comment_num) AS comment_count
+              FROM postTBL
+              LEFT JOIN commentTBL ON postTBL.idx = commentTBL.idx
+              WHERE {category} LIKE '%{query}%'
+              GROUP BY postTBL.idx"""
     return sql
   
-  # 게시물 전체 조회 쿼리
+  # 게시글 위치 조회 커리
   @staticmethod
-  def find_all_by_title(query):
-    sql = f"SELECT * FROM postTBL WHERE title LIKE '%{query}%'"
-    return sql
-  
-  # 게시물 전체 조회 쿼리
-  @staticmethod
-  def find_all_by_userid(query):
-    sql = f"SELECT * FROM postTBL WHERE userid LIKE '%{query}%'"
+  def find_all_by_location(city, district):
+    sql = f"""SELECT postTBL.*,
+              COUNT(commentTBL.comment_num) AS comment_count
+              FROM postTBL
+              LEFT JOIN commentTBL ON postTBL.idx = commentTBL.idx
+              WHERE city = '{city}' AND district = '{district}'
+              GROUP BY postTBL.idx"""
     return sql
   
   # 게시글 글 번호로 조회 쿼리
   @staticmethod
   def find_by_index(index):
-    sql = f"SELECT * FROM postTBL WHERE idx = '{index}'"
+    sql = f"SELECT * FROM postTBL WHERE idx = {index}"
     return sql
 
   # 게시글 삭제 
@@ -57,6 +65,26 @@ class BoardQuery():
   @staticmethod
   def increase_one(index):
     sql = f"UPDATE postTBL SET views = views + 1 WHERE idx = {index}"
+    return sql
+  
+  # 댓글 조회 쿼리
+  @staticmethod
+  def find_comment_by_index(index):
+    sql = f"SELECT * FROM commentTBL WHERE idx = {index}"
+    return sql
+
+
+  # 댓글 등록 쿼리
+  @staticmethod
+  def save_comment(index, id, user_id, text, name, date):
+    sql = f"INSERT INTO commentTBL VALUES (NULL, {index}, '{id}', '{user_id}', '{text}', '{name}', '{date}')"
+    return sql
+  
+  # 게시글 삭제 쿼리
+  @staticmethod 
+  def delete_by_comment_num(comment_num, index):
+    print(comment_num, index)
+    sql = f"DELETE FROM commentTBL WHERE comment_num = {comment_num} AND idx = {index}"
     return sql
   
 

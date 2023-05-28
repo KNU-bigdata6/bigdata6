@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>board</title>
+    <title>게시글 편집</title>
     <link href="/static/css/bootstrap.min.css" rel="stylesheet">
     <link href="/static/css/blog-custom.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.20/summernote-bs5.min.css" integrity="sha512-ngQ4IGzHQ3s/Hh8kMyG4FC74wzitukRMIcTOoKT3EyzFZCILOPF0twiXOQn75eDINUfKBYmzYn2AA8DkAk8veQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
@@ -49,7 +49,7 @@
     </nav>
 
     <main role="main" class="container mt-3">
-      <h1 class="text-secondary mb-4">Teacher's Bulletin Board</h1>
+      <h1 class="text-secondary mb-4">과외 게시글 편집</h1>
       <form name="form" method="POST" action="{{ url_for('board.update', index=index) }}" onsubmit="return handleSubmit();">
           <div class="form-group">
               <label for="title">제목</label>

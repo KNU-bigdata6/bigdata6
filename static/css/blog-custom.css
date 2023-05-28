@@ -11,19 +11,21 @@
 }
 
 @media (max-width: 767px) {
-  table th:nth-child(1) { width: 15%; }
-  table th:nth-child(2) { width: 25%; }
-  table th:nth-child(3) { width: 20%; }
-  table th:nth-child(4) { width: 25%; }
-  table th:nth-child(5) { width: 15%; }
-}
-
-@media (min-width: 768px) {
-  table th:nth-child(1) { width: 10%; }
-  table th:nth-child(2) { width: 40%; }
+  table th:nth-child(1) { width: 5%; }
+  table th:nth-child(2) { width: 15%; }
   table th:nth-child(3) { width: 20%; }
   table th:nth-child(4) { width: 20%; }
   table th:nth-child(5) { width: 10%; }
+  table th:nth-child(6) { width: 15%; }
+}
+
+@media (min-width: 768px) {
+  table th:nth-child(1) { width: 8%; }
+  table th:nth-child(2) { width: 18%; }
+  table th:nth-child(3) { width: 40%; }
+  table th:nth-child(4) { width: 15%; }
+  table th:nth-child(5) { width: 10%; }
+  table th:nth-child(6) { width: 9%; }
 }
 
 td > a {
@@ -31,6 +33,6 @@ td > a {
   color: #ffffff !important;
 }
 td > a:hover {
-  color: #ffffff !important;
+  color: #ADD8E6 !important;
   text-decoration:underline !important;
 }

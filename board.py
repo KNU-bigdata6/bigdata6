@@ -15,15 +15,16 @@ def main():
     
     # 검색을 안한 경우
     if not category:
-      POSTS = Board.get_post_list()
+      POSTS = sorted(Board.get_post_list(), reverse=True)
     # 검색을 한 경우
     else:
       # 위치 검색
       if category=='location':
-        pass
+        POSTS = sorted(Board.get_by_location(category, request.args.get('city'), request.args.get('district')), reverse=True)
       # 위치 검색이 아닌경우
       else:
-        POSTS = Board.get_by_category_and_query(category, request.args.get('query'))
+        POSTS = sorted(Board.get_by_category_and_query(category, request.args.get('query')), reverse=True)
+        
     page = request.args.get(get_page_parameter(), type=int, default=1)
     start_idx = (page-1) * PER_PAGE
     end_idx = start_idx + PER_PAGE
@@ -40,10 +41,12 @@ def main():
 def post(index):
   if current_user.is_authenticated:
     Board.increase_views(index)
-    data = Board.get_post_content(index)
-    _, _, user_id, title, content, name, city, district, views, date = data
+    page = Board.get_post_content(index)
+    _, _, user_id, title, content, name, city, district, views, date = page
     
-    return render_template("page.html", index=index, user_id = user_id, title=title, content = content, name=name, city=city, district = district, views=views, date=date, cur_name = current_user.name, cur_user_id = current_user.user_id, login=True)
+    comments = Board.get_post_all_comment(index)
+    
+    return render_template("page.html", index=index, user_id = user_id, title=title, content = content, name=name, city=city, district = district, views=views, date=date, cur_name = current_user.name, cur_user_id = current_user.user_id, comments = comments, login=True)
   else:
       # 경고문 띄우기
       flash("not login")
@@ -102,6 +105,28 @@ def delete(index):
   if current_user.is_authenticated:
       Board.delete_post(index)
       return redirect(url_for('board.main'))
+  else:
+      # 경고문 띄우기
+      flash("not login")
+      return redirect(url_for('main.login'))
+
+# 댓글 등록
+@board.route('/comment/write/<int:index>', methods=['POST'])
+def comment_wirte(index):
+  if current_user.is_authenticated:
+      Board.register_comment(index, current_user.user_id, request.form['text'], current_user.name)
+      return redirect(url_for('board.post', index=index))
+  else:
+      # 경고문 띄우기
+      flash("not login")
+      return redirect(url_for('main.login'))
+  
+# 댓글 삭제  
+@board.route('/comment/delete/<int:index>', methods=['POST'])
+def comment_delete(index):
+  if current_user.is_authenticated:
+      Board.delete_comment(request.form['comment_num'], index)
+      return redirect(url_for('board.post', index=index))
   else:
       # 경고문 띄우기
       flash("not login")

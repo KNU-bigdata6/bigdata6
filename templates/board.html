@@ -7,7 +7,7 @@
     <link href="/static/css/blog-custom.css" rel="stylesheet">
     <script src="https://code.jquery.com/jquery-latest.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
-    <title>board</title>
+    <title>과외 게시판</title>
   </head>
   <body class="bg-dark" style="height: 100%;">
     <nav class="navbar navbar-dark  border-bottom border-secondary">
@@ -50,24 +50,26 @@
   </nav>  
 
     <div class = "container mt-3">
-      <h1 class="mb-5 text-secondary">Teacher's Bulletin Board</h1>
+      <h1 class="mb-5 text-secondary">과외 게시판</h1>
       <table class="table table-dark">
         <thead>
           <tr class="table-active">
             <th>번호</th>
+            <th>지역 (구군)</th>
             <th>제목</th>
-            <th>작성자 (아이디)</th>
+            <th>작성자</th>
             <th>작성일</th>
             <th>조회수</th>
           </tr> 
         </thead>
         <tbody>
-        {% for post in posts[::-1] %}
+        {% for post in posts %}
           <tr>
             <!-- 0 : 게시글 번호, 3: 제목, 2: 아이디, 5 : 작성자 9: 날짜/시간, 8 : 조회수-->
-            <td>{{post[0] }}</td>
-            <td><a href="{{ url_for('board.post', index=post[0])}}" >{{ post[3] }} </a></td>
-            <td>{{ post[5] + " (" + post[2] + ")"}}</td>
+            <td>{{ post[0] }}</td>
+            <td>{{ post[6] + " (" + post[7] + ")"}}</td>
+            <td><a href="{{ url_for('board.post', index=post[0])}}" ><strong>{{ post[3] }}</strong> <span style="color: #FFA500;">({{ post[10]|string }})</span></a></td>
+            <td><strong>{{post[5]}}</strong>({{post[2]}})</td>
             <td>{{ post[9].strftime('%Y-%m-%d') }}</td>
             <td>{{ post[8] }}</td>
           </tr>
@@ -134,7 +136,7 @@
               inputGroupElement.className = 'input-group row';
       
               var selectElement1 = document.createElement('select');
-              selectElement1.name = 'region';
+              selectElement1.name = 'city';
               selectElement1.className = 'form-select col-sm-6';
               selectElement1.style.marginRight = '5px';
               selectElement1.id = 'citySelect';

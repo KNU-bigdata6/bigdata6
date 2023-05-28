@@ -33,10 +33,10 @@ CREATE TABLE IF NOT EXISTS `test_userDB`.`postTBL` (
   `title` VARCHAR(100) NOT NULL,
   `content` TEXT NOT NULL,
   `name` VARCHAR(4) NOT NULL,
-  `views` INT NOT NULL DEFAULT 0,
-  `date` DATETIME NOT NULL,
   `city` VARCHAR(20) NOT NULL,
   `district` VARCHAR(20) NOT NULL,
+  `views` INT NOT NULL DEFAULT 0,
+  `date` DATETIME NOT NULL,
   PRIMARY KEY (`idx`),
   CONSTRAINT `fk_postTBL_userTBL1`
     FOREIGN KEY (`id`)
@@ -46,12 +46,14 @@ CREATE TABLE IF NOT EXISTS `test_userDB`.`postTBL` (
 
 -- 댓글 테이블
 CREATE TABLE IF NOT EXISTS `test_userDB`.`commentTBL` (
+  `comment_num` INT NOT NULL AUTO_INCREMENT,
   `idx` INT NOT NULL,
   `id` INT NOT NULL,
-  `userid` INT NOT NULL,
+  `userid` VARCHAR(10) NOT NULL,
   `text` TEXT NOT NULL,
   `name` VARCHAR(4) NOT NULL,
   `date` DATETIME NOT NULL,
+  PRIMARY KEY (`comment_num`),
   INDEX `fk_commentTBL_userTBL1_idx` (`id` ASC) VISIBLE,
   INDEX `fk_commentTBL_postTBL1_idx` (`idx` ASC) VISIBLE,
   CONSTRAINT `fk_commentTBL_userTBL1`

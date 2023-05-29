@@ -1,7 +1,7 @@
 from flask import Flask, render_template, request, jsonify, make_response, Blueprint, redirect, url_for, flash
 from flask_login import current_user
 from flask_paginate import Pagination, get_page_parameter
-from service.board import Board
+from .user_board import Board
 
 board = Blueprint('board', __name__, url_prefix='/board')
 
@@ -121,7 +121,7 @@ def comment_wirte(index):
       flash("not login")
       return redirect(url_for('main.login'))
   
-# 댓글 삭제  
+# 댓글 삭제
 @board.route('/comment/delete/<int:index>', methods=['POST'])
 def comment_delete(index):
   if current_user.is_authenticated:

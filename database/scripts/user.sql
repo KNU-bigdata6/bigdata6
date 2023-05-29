@@ -14,7 +14,7 @@ CREATE TABLE
         `name` VARCHAR(4) NOT NULL,
         `gender` CHAR(1) NOT NULL,
         PRIMARY KEY (`id`),
-        UNIQUE INDEX `userid_UNIQUE` (`userid` ASC) VISIBLE
+        UNIQUE INDEX `userid_UNIQUE` (`userid` ASC)
     );
 
 -- 대화 내용 기록 테이블
@@ -49,8 +49,7 @@ CREATE TABLE
 
 -- 댓글 테이블
 
-CREATE TABLE
-    IF NOT EXISTS `test_userDB`.`commentTBL` (
+CREATE TABLE IF NOT EXISTS `test_userDB`.`commentTBL` (
         `comment_num` INT NOT NULL AUTO_INCREMENT,
         `idx` INT NOT NULL,
         `id` INT NOT NULL,
@@ -59,8 +58,10 @@ CREATE TABLE
         `name` VARCHAR(4) NOT NULL,
         `date` DATETIME NOT NULL,
         PRIMARY KEY (`comment_num`),
-        INDEX `fk_commentTBL_userTBL1_idx` (`id` ASC) VISIBLE,
-        INDEX `fk_commentTBL_postTBL1_idx` (`idx` ASC) VISIBLE,
+        KEY `fk_commentTBL_userTBL1_idx` (`id`),
+        KEY `fk_commentTBL_postTBL1_idx` (`idx`),
         CONSTRAINT `fk_commentTBL_userTBL1` FOREIGN KEY (`id`) REFERENCES `test_userDB`.`userTBL` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
         CONSTRAINT `fk_commentTBL_postTBL1` FOREIGN KEY (`idx`) REFERENCES `test_userDB`.`postTBL` (`idx`) ON DELETE CASCADE
-    )
+);
+
+

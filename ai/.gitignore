@@ -1,0 +1,26 @@
+# Created by https://www.toptal.com/developers/gitignore/api/venv
+# Edit at https://www.toptal.com/developers/gitignore?templates=venv
+
+### venv ###
+# Virtualenv
+# http://iamzed.com/2009/05/07/a-primer-on-virtualenv/
+.Python
+[Bb]in
+[Ii]nclude
+[Ll]ib
+[Ll]ib64
+[Ll]ocal
+pyvenv.cfg
+.venv
+pip-selfcheck.json
+*.pyc
+__pycache__/
+.DS_STORE
+.env
+.vscode
+ai/nlp/model/daily_medium_model.pt
+ai/nlp/model/business_small_model.pt
+
+
+# End of https://www.toptal.com/developers/gitignore/api/venv
+

@@ -22,7 +22,7 @@ class BoardQuery():
               COUNT(commentTBL.comment_num) AS comment_count
               FROM postTBL
               LEFT JOIN commentTBL ON postTBL.idx = commentTBL.idx
-              WHERE {category} LIKE '%{query}%'
+              WHERE postTBL.{category} LIKE '%{query}%'
               GROUP BY postTBL.idx"""
     return sql
   

@@ -6,13 +6,8 @@ business = Blueprint('business', __name__, url_prefix='/business')
 
 # 모델 불러오기
 tokenizer = AutoTokenizer.from_pretrained("microsoft/DialoGPT-small")
-<<<<<<< HEAD
 business_model = torch.load('/ai/nlp/model/business_small_model.pt')
 business_model.eval()
-=======
-business_model = torch.load('model/business_small_model.pt')
-business_model.eval()   
->>>>>>> 55d46fdfb9f82c28212f5115fc9e6e2c086dacf7
 
 # Define a dictionary to store chat history for each user
 business_histories_ids = {}

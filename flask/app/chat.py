@@ -40,10 +40,11 @@ def text(subject):
             ai = {"data": answer, "answer_audio": encoded_string.decode()}
 
             # 답변 DB저장
-            #User.record(current_user.user_id,  question, answer)
+            User.record(subject, current_user.user_id,  question, answer)
             # ai db담기
             return jsonify(result="success", result2=ai)
         else:
+            reset_user_histories(subject, current_user.user_id)
             return render_template(f'chat.html', login=True, subject=subject)
     else:
         # 경고문 띄우기
@@ -79,8 +80,8 @@ def audio(subject):
                   "answer_audio": encoded_string.decode()}
             print(encoded_string.decode())
 
-            # 답변 전송
-            # User.record(current_user.user_id, question, answer)
+            # 답변 DB저장
+            User.record(subject, current_user.user_id,  question, answer)
 
             return jsonify(result="success", result2=ai)
 

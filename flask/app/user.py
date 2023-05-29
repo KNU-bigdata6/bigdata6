@@ -1,6 +1,8 @@
 from .db_model.db_connection import USER_DB, conn_db
 from .db_model.user_query import UserQuery
 from .db_model.record_query import RecordQuery
+from .db_model.board_query import BoardQuery
+
 from flask_login import UserMixin
 from datetime import datetime
 
@@ -117,19 +119,18 @@ class User(UserMixin):
     def user_password_change(id, new_password):
         sql = UserQuery.update_password_by_id(id, new_password)
         USER_DB.execute(sql)
-        
+
         SUCCESS = True
         return SUCCESS
-    
+
     # 회원 대화 기록 저장
     @staticmethod
-    def record(user_id, question, answer):
+    def record(subject, user_id, question, answer):
         conn_db(USER_DB)
 
         # 회원 번호 조회
         user = User.find_member(user_id)
         id = user.id
-        sql = RecordQuery.save(id, question, answer,
+        sql = RecordQuery.save(id, subject, question, answer,
                             datetime.now().strftime('%Y-%m-%d %H:%M:%S'))
         USER_DB.execute(sql)
-    

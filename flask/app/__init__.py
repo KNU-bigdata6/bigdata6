@@ -3,6 +3,7 @@ from .routes import main
 from .user import User
 from .chat import chat
 from .myinfo import info
+from .board import board
 # from events import ChatNamepsace
 from flask_login import LoginManager, current_user
 from datetime import timedelta
@@ -27,7 +28,7 @@ def create_app():
     app.register_blueprint(main)
     app.register_blueprint(chat)
     app.register_blueprint(info)
-
+    app.register_blueprint(board)
     login_manager.init_app(app)  # app 에 login_manager연결
     login_manager.session_protection = "strong"  # session 정보를 복잡하게 만듦
 

@@ -35,11 +35,20 @@ class Database:
         self.conn.close()
         self.conn = None
         
-    # DB commit 필요한 쿼리 (INSERT, DELETE)
+    # DB commit 필요한 쿼리 (INSERT, DELETE, UPDATE)
     def execute(self, sql):
         with self.conn.cursor() as cursor:
             cursor.execute(sql)
         self.conn.commit()
+    
+    def execute_and_return_index(self, sql):
+        with self.conn.cursor() as cursor:
+            cursor.execute(sql)
+            cursor.execute("SELECT LAST_INSERT_ID()")
+            index = cursor.fetchone()[0]
+        self.conn.commit()
+        
+        return index
     
     def select_one(self, sql):
         result = None

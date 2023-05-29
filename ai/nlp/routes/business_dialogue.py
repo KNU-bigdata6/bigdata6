@@ -6,13 +6,9 @@ business = Blueprint('business', __name__, url_prefix='/business')
 
 # 모델 불러오기
 tokenizer = AutoTokenizer.from_pretrained("microsoft/DialoGPT-small")
-<<<<<<< HEAD
+
 business_model = torch.load('/ai/nlp/model/business_small_model.pt')
 business_model.eval()
-=======
-business_model = torch.load('model/business_small_model.pt')
-business_model.eval()   
->>>>>>> 55d46fdfb9f82c28212f5115fc9e6e2c086dacf7
 
 # Define a dictionary to store chat history for each user
 business_histories_ids = {}
@@ -31,19 +27,11 @@ def predict():
 
   # Concatenate chat history for the user and generate response
   bot_input_ids = torch.cat([business_histories_ids[user_id], new_user_input_ids], dim=-1) if len(business_histories_ids[user_id]) >0 else new_user_input_ids
-<<<<<<< HEAD
+
 
   # Decode and return bot's response
   business_histories_ids[user_id] = business_model.generate(bot_input_ids, max_length=1000, pad_token_id=tokenizer.eos_token_id)
 
-  # Decode and return bot's response
-=======
-  
-  # Decode and return bot's response
-  business_histories_ids[user_id] = business_model.generate(bot_input_ids, max_length=1000, pad_token_id=tokenizer.eos_token_id)
-  
-  # Decode and return bot's response
->>>>>>> 55d46fdfb9f82c28212f5115fc9e6e2c086dacf7
   bot_response = tokenizer.decode(business_histories_ids[user_id][:, bot_input_ids.shape[-1]:][0], skip_special_tokens=True)    
 
   return make_response(bot_response, 200)
@@ -51,11 +39,9 @@ def predict():
 # 이전 대화 기록 초기화
 @business.route('/', methods=['DELETE'])
 def delete_user_history():
-<<<<<<< HEAD
+
   user_id = request.form['user_id']
-=======
-  user_id = request.form['user_id'] 
->>>>>>> 55d46fdfb9f82c28212f5115fc9e6e2c086dacf7
+
   if user_id in business_histories_ids:
     business_histories_ids[user_id]=[]
   return make_response('', 200)

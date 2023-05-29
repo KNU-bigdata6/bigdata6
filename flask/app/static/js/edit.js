@@ -1,14 +1,3 @@
-$(document).ready(function() {
-  $('#summernote').summernote({
-      height: 300,                 // 에디터 높이
-      minHeight: null,             // 최소 높이
-      maxHeight: null,             // 최대 높이
-      focus: true,                 // 에디터 로딩 후 포커스를 맞출지 여부
-      lang: "ko-KR",               // 한글 설정
-      placeholder: '내용을 입력하세요.' // placeholder 설정
-  });
-});
-
 function handleSubmit() {
   var title = document.getElementById('title').value;
   var content = $('#summernote').val();

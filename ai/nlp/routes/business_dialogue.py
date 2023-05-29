@@ -32,6 +32,8 @@ def predict():
   # Decode and return bot's response
   business_histories_ids[user_id] = business_model.generate(bot_input_ids, max_length=1000, pad_token_id=tokenizer.eos_token_id)
 
+
+  # Decode and return bot's response
   bot_response = tokenizer.decode(business_histories_ids[user_id][:, bot_input_ids.shape[-1]:][0], skip_special_tokens=True)    
 
   return make_response(bot_response, 200)
@@ -41,6 +43,7 @@ def predict():
 def delete_user_history():
 
   user_id = request.form['user_id']
+
 
   if user_id in business_histories_ids:
     business_histories_ids[user_id]=[]

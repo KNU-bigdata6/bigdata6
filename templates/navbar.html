@@ -1,0 +1,46 @@
+<nav class="navbar navbar-dark  border-bottom border-secondary">
+    <div class="container-fluid">
+        <a class="navbar-brand text-secondary" href="{{ url_for('main.home') }}">MyAIFriend</a>
+        <button class="navbar-toggler border-secondary " type="button"
+                data-bs-toggle="collapse"
+                data-bs-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent"
+                aria-expanded="false"
+                aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
+            <ul class="navbar-nav">
+                {% if login %}
+                <li class="nav-item row text-center">
+                    <div class="nav-link col-4 border-bottom border-secondary text-light">Account</div>
+                    <div class="nav-link col-4 border-bottom border-secondary text-light">Conversation Type</div>
+                    <div class="nav-link col-4 border-bottom border-secondary text-light">Teacher's Bulletin Board</div>
+                </li>
+                <li class="nav-item row text-center">
+                    <a class="nav-link col-4 " href="{{ url_for('info.myinfo') }}">Myinfo</a>
+                    <a class="nav-link col-4 " href="{{ url_for('chat.text', subject ='daily') }}">Life</a>
+                    <a class="nav-link col-4"  href="{{ url_for('board.main') }}">Board</a>
+                </li>
+                <li class="nav-item row text-center">
+                    <a class="nav-link col-4" href="{{ url_for('main.logout') }}">Logout</a>
+                    <a class="nav-link col-4" href="{{ url_for('chat.text', subject ='business') }}">Business</a>
+                    <a class="nav-link col-4"  href="{{ url_for('board.write') }}">Write</a>
+                </li>
+                <li class="nav-item row text-center">
+                    <div class="nav-link col-4"></div>
+                    <a class="nav-link col-4 " href="{{ url_for('chat.text', subject ='empathy') }}">Empathy</a>
+                    <div class="nav-link col-4"></div>
+                </li>
+                {% else %}
+                <li class="nav-item align-self-center">
+                    <a class="nav-link" href="{{ url_for('main.join') }}">Sign up</a>
+                </li>
+                <li class="nav-item align-self-center">
+                    <a class="nav-link" href="{{ url_for('main.login') }}">Sign in</a>
+                </li>
+                {% endif %}
+            </ul>
+        </div>
+    </div>
+</nav>

@@ -12,46 +12,14 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="/static/css/bootstrap.min.css" rel="stylesheet">
-    <script src="https://code.jquery.com/jquery-latest.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous">
     </script>
     <title>내 정보</title>
 </head>
 <body class = "bg-dark text-secondary" style="height: 100%;">
-    <nav class="navbar navbar-dark  border-bottom border-secondary">
-        <div class="container-fluid">
-            <a class="navbar-brand text-secondary" href="{{ url_for('main.home') }}">MyAIFriend</a>
-            <button class="navbar-toggler border-secondary " type="button"
-                    data-bs-toggle="collapse"
-                    data-bs-target="#navbarSupportedContent"
-                    aria-controls="navbarSupportedContent"
-                    aria-expanded="false"
-                    aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
-                <ul class="navbar-nav">
-                    {% if login %}
-                    <li class="nav-item align-self-center">
-                        <a class="nav-link" href="{{ url_for('info.myinfo') }}">Myinfo</a>
-                    </li>
-                    <li class="nav-item align-self-center">
-                        <a class="nav-link" href="{{ url_for('main.logout') }}">Logout</a>
-                    </li>
-                    {% else %}
-                    <li class="nav-item align-self-center">
-                        <a class="nav-link" href="{{ url_for('main.join') }}">Sign up</a>
-                    </li>
-                    <li class="nav-item align-self-center">
-                        <a class="nav-link" href="{{ url_for('main.login') }}">Sign in</a>
-                    </li>
-                    {% endif %}
-                </ul>
-            </div>
-        </div>
-    </nav>
+    {% include 'navbar.html' %}
 
-    
     <div class = "container">
         <div class="row mt-5">
             <h1>MyAIFriend</h1>
@@ -142,114 +110,6 @@
         <a href="{{ url_for('info.withdrawal') }}" class=" mt-5 btn btn-outline-secondary justify-content-center btn-lg col-5 col-xl-3">Delete account</a>
 
     </div>
-
-    <script>
-
-    var pw = false;
-    var npw = false;
-    var cnpw = false;
-
-    function capLock(e){
-        kc = e.keyCode ? e.keyCode : e.which;
-        sk = e.shiftKey ? e.shiftKey : ((kc == 16) ? true : false);
-        if(((kc >= 65 && kc <= 90) && !sk)||((kc >= 97 && kc <= 122) && sk)){
-            document.getElementById('divMayus3').style.display="none";
-            document.getElementById('divMayus').style.display = 'block';
-            document.getElementById('divMayus2').style.display = 'block';
-            document.getElementById('divMayus4').style.display = 'block';
-        }
-        else{
-            document.getElementById('divMayus').style.display="none";
-            document.getElementById('divMayus2').style.display = "none";
-            document.getElementById('divMayus4').style.display = "none";
-            document.getElementById('divMayus3').style.display = 'block';
-        }
-    }
-
-    function p_check(password){
-        var pattern = /^(?=.*?[a-zA-Z])(?=.*?[0-9])(?=.*?[#?!@$ %^&*-]).{8,}$/g;
-
-        var value = document.getElementById(password).value;
-
-        if (pattern.test(value)){
-            document.getElementById(password).style.color = "green";
-            document.getElementById(password).style.borderColor = "green";
-            if(password == 'password1'){
-                pw = true;
-            }
-            else if(password == 'password2'){
-                npw = true;
-            }
-        }
-        else{
-            if(!document.getElementById(password).value){
-                document.getElementById(password).style.color = "black";
-                document.getElementById(password).style.borderColor = "black";
-                if(password == 'password1'){
-                    pw = false;
-                }
-                else if(password == 'password2'){
-                    npw = false;
-                }
-            }
-            else{
-                document.getElementById(password).style.color = "red";
-                document.getElementById(password).style.borderColor = "red";
-                if(password == 'password1'){
-                    pw = false;
-                }
-                else if(password == 'password2'){
-                    npw = false;
-                }
-            }
-        }
-        }
-
-            function p_check2(){
-                var p1_value = document.getElementById('password2').value;
-                var p2_value = document.getElementById('password3').value;
-                if(p1_value == p2_value){
-                    document.getElementById('password3').style.color = "green";
-                    document.getElementById('password3').style.borderColor = "green";
-                    cnpw  = true
-                }
-                else{
-                    if(!document.getElementById('password3').value){
-                        document.getElementById('password3').style.color = "black";
-                        document.getElementById('password3').style.borderColor = "black";
-                        cnpw  = false
-                    }
-                    else{
-                        document.getElementById('password3').style.color = "red";
-                        document.getElementById('password3').style.borderColor = "red";
-                        cnpw  = false
-                    }
-                }
-            }
-
-
-    function Change(){
-        document.getElementById("change").style.display = 'none';
-        document.getElementById("submit").style.display = 'block';
-        document.getElementById("password1").disabled = false;
-        document.getElementById("change_password").style.display = 'block'
-        document.getElementById('divMayus3').style.display = 'block';
-    }
-
-    function Submit(){
-        var form = document.admin_form;
-        console.log(pw)
-        console.log(cnpw)
-        console.log(npw)
-
-        if (cnpw && npw && pw) {
-            form.submit();
-        }
-        else{
-            alert("Insufficient information")
-        }
-    }
-    </script>
-
+    <script src="../static/js/myinfo.js"></script>
 </body>
 </html>

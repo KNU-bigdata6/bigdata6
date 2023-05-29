@@ -10,69 +10,35 @@
     <title>과외 게시글</title>
   </head>
   <body class="bg-dark" style="height: 100%;">
-    <nav class="navbar navbar-dark  border-bottom border-secondary">
-      <div class="container-fluid">
-          <a class="navbar-brand text-secondary" href="{{ url_for('main.home') }}">MyAIFriend</a>
-          <button class="navbar-toggler border-secondary " type="button"
-                  data-bs-toggle="collapse"
-                  data-bs-target="#navbarSupportedContent"
-                  aria-controls="navbarSupportedContent"
-                  aria-expanded="false"
-                  aria-label="Toggle navigation">
-              <span class="navbar-toggler-icon"></span>
-          </button>
-          <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
-            <ul class="navbar-nav">
-                {% if login %}
-                <li class="nav-item row text-center">
-                    <div class="nav-link col-6 border-bottom border-secondary text-light">Account</div>
-                    <div class="nav-link col-6 border-bottom border-secondary text-light">Teacher's Bulletin Board</div>
-                </li>
-                <li class="nav-item row text-center">
-                    <a class="nav-link col-6 " href="{{ url_for('info.myinfo') }}">Myinfo</a>
-                    <a class="nav-link col-6"  href="{{ url_for('board.main') }}">Board</a>
-                </li>
-                <li class="nav-item row text-center">
-                    <a class="nav-link col-6" href="{{ url_for('main.logout') }}">Logout</a>
-                    <a class="nav-link col-6"  href="{{ url_for('board.write') }}">Write</a>
-                </li>
-                {% else %}
-                <li class="nav-item align-self-center">
-                    <a class="nav-link" href="{{ url_for('main.join') }}">Sign up</a>
-                </li>
-                <li class="nav-item align-self-center">
-                    <a class="nav-link" href="{{ url_for('main.login') }}">Sign in</a>
-                </li>
-                {% endif %}
-            </ul>
-        </div>
-      </div>
-  </nav>
+    {% include 'navbar.html' %}
 
-    <div class = "container mt-3">
-    <div class="table-responsive mt-3">
+
+<div class = "container mt-3">
+    <div class="table-responsive mt-3 md-3">
       <table class="table table-bordered table-striped table-hover text-white">
         <thead>
           <tr>
-            <th class="col-md-8 col-sm-2 col-xs-8">작성자</th>
-            <td class="col-md-4 col-sm-10 col-xs-4" colspan="5"><strong>{{ name}}</strong>({{user_id}})</td>
+            <th class="col-md-2 col-sm-4 col-xs-6">작성자</th>
+            <td class="col-md-10 col-sm-9 col-xs-6" colspan="5">{{ name + ' (' + user_id + ')'}}</td>
           </tr>
           <tr>
             <th class="col-md-2 col-sm-4 col-xs-6">작성일</th>
             <td class="col-md-10 col-sm-8 col-xs-6" colspan="5">{{ date }}</td>
           </tr>
           <tr>
-            <th class="col-md-2 col-sm-4 col-xs-6">지역</th>
-            <td class="col-md-2 col-sm-4 col-xs-6">{{ city }}</td>
-            <th class="col-md-2 col-sm-4 col-xs-6">구군</th>
-            <td class="col-md-2 col-sm-4 col-xs-6">{{ district }}</td>
-            <th class="col-md-2 col-sm-4 col-xs-6">조회수</th>
-            <td class="col-md-2 col-sm-4 col-xs-6">{{ views }}</td>
+            <th class="col-md-2 col-sm-2 col-xs-2">지역</th>
+            <td class="col-md-2 col-sm-2 col-xs-2">{{ city }}</td>
+            <th class="col-md-2 col-sm-2 col-xs-2">구군</th>
+            <td class="col-md-2 col-sm-2 col-xs-2">{{ district }}</td>
+            <th class="col-md-2 col-sm-2 col-xs-2">조회수</th>
+            <td class="col-md-2 col-sm-2 col-xs-2">{{ views }}</td>
           </tr>
         </thead>
       </table>
-    
     </div>
+
+
+
       <div class="card custom-card">
         <div class="card-body" >
           <h5 class="card-title"><strong>{{ title }}</strong></h5>
@@ -144,18 +110,6 @@
       </form>
     </div>
   </div>
-  <script>
-  function handleSubmit() {
-
-    var textInput = document.getElementById('text');
-    
-    if (textInput.value.trim() == '') {
-      alert('등록하시려는 댓글을 입력해주세요.');
-      return false;
-    }
-
-    return true;
-  }
-</script>
+  <script src="../static/js/page.js"></script>
 </body>
 </html>

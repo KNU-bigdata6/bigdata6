@@ -1,0 +1,49 @@
+<html>
+    <head>
+        <title>Flask-Simple-Chat</title>
+        <script type="text/javascript" src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+        <script src="https://cdn.socket.io/4.6.0/socket.io.min.js" integrity="sha384-c79GN5VsunZvi+Q/WObgk2in0CbZsHnjEqvFxC5DxHn9lTfNce2WW6h2pH6u/kF+" crossorigin="anonymous"></script>
+        <script type="text/javascript" charset="utf-8">
+            var socket;
+
+            $(document).ready(function(){
+                socket = io.connect('http://' + document.domain + ':' + location.port + '/chat');
+                socket.on('connect', function(data) {
+                    console.log(data);
+                });
+                socket.on('status', function(data) {
+                    $('#chat').val($('#chat').val() + '<' + data.msg + '>\n');
+                    $('#chat').scrollTop($('#chat')[0].scrollHeight);
+                });
+                socket.on('message', function(data) {
+                    $('#chat').val($('#chat').val() + data + '\n');
+                    $('#chat').scrollTop($('#chat')[0].scrollHeight);
+                });
+                $('#text').keypress(function(e) {
+                    var code = e.keyCode || e.which;
+                    if (code == 13) {
+                        text = $('#text').val();
+                        $('#text').val('');
+                        socket.emit('text', {type: 'text', data: {msg: text}});
+                        console.log("성공")
+                    }
+                });
+            });
+            function leave_room() {
+                socket.emit('left', {}, function() {
+                    socket.disconnect();
+
+                    // go back to the login page
+                    window.location.href = "{{ url_for('main.home') }}";
+                });
+            }
+        </script>
+    </head>
+    <body>
+        <h1>Chat Room: {{ room }}</h1>
+        <h3>edited by IML<h3>
+        <textarea id="chat" cols="80" rows="20"></textarea><br><br>
+        {{ name }} <input id="text" size="80" placeholder="메시지를 입력해보세요!"><br><br>
+        <a href="#" onclick="leave_room();">채팅방 나가기</a>
+    </body>
+</html>

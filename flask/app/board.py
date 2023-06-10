@@ -78,7 +78,7 @@ def edit(index):
     data = Board.get_post_content(index)
     title = data[3]
     content = data[4]
-    return render_template("edit.html", index=index, title=title, content=content)
+    return render_template("edit.html", index=index, title=title, content=content, login=True)
   else:
       # 경고문 띄우기
       flash("not login")

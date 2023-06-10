@@ -4,7 +4,7 @@ import torch
 from .routes.business_dialogue import business
 from .routes.daily_dialogue import daily
 from flask_cors import CORS
-# from .routes.daily_dialogue import empathy
+from .routes.hospital_dialogue import hospital
 
 def create_app():
 
@@ -12,7 +12,7 @@ def create_app():
     CORS(app)
     app.register_blueprint(business)
     app.register_blueprint(daily)
-    # app.register_blueprint(empathy)
+    app.register_blueprint(hospital)
     return app
 
 app = create_app()

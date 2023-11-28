@@ -1,4 +1,4 @@
-<img width="792" alt="Screen Shot 2023-11-29 at 5 40 31 AM" src="https://github.com/KNU-bigdata6/bigdata6/assets/100686513/76d9242a-c6ee-4f9f-a1cd-381ec8d4ef80">## 자연어 처리 모델 서빙 서버(flask)
+## 자연어 처리 모델 서빙 서버(flask)
 
 인공지능 모델의 경우 용량이 커서 github에 업로드하지 않았습니다.
 
